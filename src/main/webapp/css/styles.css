@@ -1,0 +1,374 @@
+/* Body */
+body {  
+  font-family: "Helvetica Neue",Helvetica,Arial,"LiHei Pro","Microsoft JhengHei",PMingLiU,sans-serif;
+  font-size: 14px;
+  padding-top: 50px; /* For .navbar-fixed-top. */    
+}
+
+/* For Footer */
+html, 
+body {
+	height: 100%;
+}
+
+#mainDiv {
+	min-height: 100%;
+	height: auto !important;
+  height: 100%;
+  margin: 0 auto -40px;
+}
+
+#pushDiv {
+	min-height: 40px;
+	height: auto !important;	
+}
+
+#footer {
+	min-height: 40px;
+	height: auto !important;
+	background-color: #040915;
+}
+
+.footer-content{
+	font-size: 12px;
+	color: #AAA;
+	padding-top: 5px;
+	padding-left: 10%;
+	padding-right: 10%;
+}
+
+/* For Logo Image */
+.navbar-brand {
+  padding: 0px;
+}
+.navbar-brand > img {
+  height: 100%;
+  padding: 5px 15px;
+  width: auto;
+}
+
+/* For Menu bar Color */
+.navbar-default {
+	background-color: #FF8000;
+	border-color: #FF5000;
+}
+
+.navbar-default .navbar-nav > li > a {
+	color: #FFFFFF;
+}
+
+.navbar-default .navbar-nav > li > a:hover, 
+.navbar-default .navbar-nav > li > a:focus {
+	background-color: #FFA019;
+	color: #FFF;
+}
+
+.navbar-default .navbar-nav > .open > a, 
+.navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a:focus {
+	background-color: #FFA019;
+	color: #FFFF00;
+}
+
+.navbar-default .navbar-nav > li > .dropdown-menu {
+	background-color: #FFA019;
+	color: #FFFF00;
+}
+
+.navbar-default .navbar-nav > li > .dropdown-menu > li > a, 
+.navbar-default .navbar-nav .open .dropdown-menu > li > a {
+	color: #FFFF00;
+}
+
+.navbar-default .navbar-nav > li > .dropdown-menu > li > a:hover, 
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover {
+	background-color: #FFBC25;
+	color: #451F0A;
+}
+
+.navbar .divider-vertical {
+	height: 36px;
+	margin: 0px;
+	border-left: 1px solid #FFA019;
+	border-right: 1px solid #FFFFFF;
+	opacity: 0.5;
+}
+
+.navbar-tool {
+	background-color: #FFEFD5;
+	border-color: #FFBC25;
+	min-height: 36px
+}
+
+.navbar-tool .navbar-nav > li > a {
+	color: #8C5115;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	font-size: 1.5em;
+}
+
+.navbar-tool .navbar-nav > li > a.functionButton {
+	color: #B22222;
+	padding-top: 10px;
+	padding-bottom: 8px;
+	font-size: 1.2em;
+}
+
+.navbar-tool .navbar-text {
+	color: #8C5115;
+}
+
+.navbar-text {
+	margin-top: 10px;
+	margin-bottom: 8px;
+}
+
+.affix {
+	width: 100%;
+}
+
+.navbar-tool > li > .form-control {
+	margin-top: 5px;
+}
+
+.navbar-tool > .btn-group {
+	margin-top: 5px;
+}
+
+.navbar-tool > .btn-group > .btn {
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+
+/* For Index Page Process */
+.label-tool {
+	color: #337AB7;
+	font-size: 100%;
+	font-weight: 400;
+}
+
+a.label-tool:hover {
+	color: #337AB7;
+}
+
+a.label-tool:focus {
+	color: #337AB7;
+}
+
+
+/* For Panel Color */
+.panel-tool {
+	border-color: #B22222;
+}
+
+.panel-tool > .panel-heading {
+	color: #FFF;
+	background-color: #B22222;
+	border-color: #B22222;
+}
+.panel-tool > .panel-body {
+	padding: 20px;
+}
+/* For Panel Title Font Size */
+.panel-tool-title {
+	font-size: 14px;
+}
+/* For Message Bar */
+.well-tool {
+	padding: 5px;
+	border-radius: 3px;
+	background-color: #FFEFD5;	
+	border: 1px solid #FFBC25;
+	color: #8C5115;
+	margin-bottom: 10px;
+}
+/* For Function Bar */
+.btn-group-tool {
+	margin-bottom: 10px;	
+}
+/* For Tabs */
+.nav-tabs {
+	border-bottom-color: #B22222;
+}
+
+.nav-tabs > li > a {
+	padding-bottom: 6px;
+	padding-top: 3px;
+	color: #696969;
+}
+
+.nav-tabs > li.active > a, 
+.nav-tabs > li.active > a:hover, 
+.nav-tabs > li.active > a:focus {
+	border-top-color: #B22222;
+	border-right-color: #B22222;
+	border-bottom-color: transparent;
+	border-left-color: #B22222;	
+	color: #B22222;
+}
+
+/* Margin */
+.margin-top-lg {
+  margin-top: 24px;
+}
+.margin-top-md {
+  margin-top: 18px;
+}
+.margin-top-sm {
+  margin-top: 12px;
+}
+.margin-bottom-lg {
+  margin-bottom: 24px;
+}
+.margin-bottom-md {
+  margin-bottom: 18px;
+}
+.margin-bottom-sm {
+  margin-bottom: 12px;
+}
+.margin-right-lg {
+  margin-right: 24px;
+}
+.margin-right-md {
+  margin-right: 18px;
+}
+.margin-right-sm {
+  margin-right: 12px;
+}
+.margin-left-lg {
+  margin-left: 24px;
+}
+.margin-left-md {
+  margin-left: 18px;
+}
+.margin-left-sm {
+  margin-left: 12px;
+}
+
+/* For Round Button */
+.btn-round {
+	width: 40px;
+ 	height: 40px;
+  border-radius: 50%;
+}
+
+/* Fixed Button */
+.btn-fixed {
+	position: fixed;
+	z-index: 7999;
+}
+
+/* For Function Buttion */
+.btn-tool-always-enabled {
+	color: #FFF;
+	background-color: #8C5115;
+	border-color: #8C5115;
+}
+.btn-tool-always-enabled:focus,
+.btn-tool-always-enabled.focus {
+  color: #FFFF00;
+  background-color: #B37331;
+  border-color: #8C5115;
+}
+.btn-tool-always-enabled:hover {
+  color: #FFFF00;
+  background-color: #B37331;
+  border-color: #8C5115;
+}
+.btn-tool-always-enabled:active,
+.btn-tool-always-enabled.active {
+  color: #FFFF00;
+  background-color: #B37331;
+  border-color: #8C5115;
+}
+.btn-tool-always-enabled:active:hover,
+.btn-tool-always-enabled.active:hover,
+.btn-tool-always-enabled:active:focus,
+.btn-tool-always-enabled.active:focus,
+.btn-tool-always-enabled:active.focus,
+.btn-tool-always-enabled.active.focus {
+  color: #FFF;
+  background-color: #8C5115;
+  border-color: #8C5115;
+}
+
+.btn-tool {
+	color: #FFF;
+	background-color: #B7A524;
+	border-color: #B7A524;
+}
+.btn-tool:focus,
+.btn-tool.focus {
+  color: #FFFF00;
+  background-color: #D4BE6A;
+  border-color: #B7A524;
+}
+.btn-tool:hover {
+  color: #FFFF00;
+  background-color: #D4BE6A;
+  border-color: #B7A524;
+}
+.btn-tool:active,
+.btn-tool.active {
+  color: #FFFF00;
+  background-color: #D4BE6A;
+  border-color: #B7A524;
+}
+.btn-tool:active:hover,
+.btn-tool.active:hover,
+.btn-tool:active:focus,
+.btn-tool.active:focus,
+.btn-tool:active.focus,
+.btn-tool.active.focus {
+  color: #FFF;
+  background-color: #B7A524;
+  border-color: #B7A524;
+}
+.btn-tool:disabled,
+.btn-tool.disabled {
+	color: #000;
+  background-color: #E8E8D1;
+  border-color: #B7A524;
+}
+.btn-tool.disabled:hover,
+.btn-tool[disabled]:hover,
+.btn-tool.disabled:focus,
+.btn-tool[disabled]:focus,
+.btn-tool.disabled.focus,
+.btn-tool[disabled].focus {
+	color: #000;
+  background-color: #E8E8D1;
+  border-color: #B7A524;
+}
+
+/* For Callout Begin */
+.callout {
+  padding: 20px;
+  margin: 20px 0;
+  border: 1px solid #DBDBDB;
+  border-left-width: 5px;
+  border-radius: 3px;
+}
+
+.list-order{
+	margin-bottom:10px;
+	margin-top:10px;
+}
+
+.right-border{
+  border-right: 2px solid #eee;
+  border-color: #D8D8D8;
+}
+
+.callout-persona {
+	border-left-color: #C787DC;
+}
+
+.toggler-ext {
+	height: 100px;
+  color: #B22222;
+}
+.toggler-ext > span > p {
+  font-family: "Helvetica Neue",Helvetica,Arial,"LiHei Pro","Microsoft JhengHei",PMingLiU,sans-serif;
+  font-size: 14px;
+}

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entity-mappings version="1.0" xmlns="http://java.sun.com/xml/ns/persistence/orm" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	
+	<named-query name="ToolManagementService.queryToolList">
+		<query>
+		<![CDATA[
+				SELECT
+				    T.uuid,
+				    T.name,
+				    T.description,
+				    T.url
+				FROM
+					Tool T
+				WHERE
+					(0 = :by_name OR T.name like :name)
+				ORDER BY
+				    T.name ASC
+		]]>
+		</query>
+	</named-query>
+
+	<named-query name="ToolManagementService.queryToolListCount">
+		<query>
+		<![CDATA[
+				SELECT
+				    COUNT(T.uuid)
+				FROM
+					Tool T
+				WHERE
+					(0 = :by_name OR T.name like :name)
+		]]>
+		</query>
+	</named-query>	
+
+	<named-query name="ToolManagementService.checkToolNameExisted">
+		<query>
+		<![CDATA[
+				SELECT
+				    COUNT(T.uuid)
+				FROM
+					Tool T
+				WHERE
+					T.name = :name
+		]]>
+		</query>
+	</named-query>	
+
+
+</entity-mappings>

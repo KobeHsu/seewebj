@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entity-mappings version="1.0" xmlns="http://java.sun.com/xml/ns/persistence/orm" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	
+	<named-query name="OnlineIssueManagementService.queryOnlineIssueList">
+		<query>
+		<![CDATA[
+				SELECT
+				    M.uuid,
+				    P.name,
+				    M.title,
+				    M.status
+				FROM
+					OnlineIssue M, Project P
+				WHERE
+					(0 = :by_project OR M.projectUuid = :project)
+				AND (0 = :by_createTimeBegin OR M.createTime >= :createTimeBegin)
+				AND (0 = :by_createTimeEnd OR M.createTime <= :createTimeEnd)
+				AND (0 = :by_status OR M.status = :status)
+				AND M.projectUuid = P.uuid
+				ORDER BY
+				    M.createTime DESC
+		]]>
+		</query>
+	</named-query>
+
+	<named-query name="OnlineIssueManagementService.queryOnlineIssueListCount">
+		<query>
+		<![CDATA[
+				SELECT
+				    COUNT(M.uuid)
+				FROM
+					OnlineIssue M, Project P
+				WHERE
+					(0 = :by_project OR M.projectUuid = :project)
+				AND (0 = :by_createTimeBegin OR M.createTime >= :createTimeBegin)
+				AND (0 = :by_createTimeEnd OR M.createTime <= :createTimeEnd)
+				AND (0 = :by_status OR M.status = :status)
+				AND M.projectUuid = P.uuid
+		]]>
+		</query>
+	</named-query>	
+
+	<named-query name="OnlineIssueManagementService.queryOnlineIssueFigureList">
+		<query>
+		<![CDATA[
+				SELECT
+				    M
+				FROM
+					OnlineIssueFigure M
+				WHERE
+					M.dataUuid = :dataUuid
+		]]>
+		</query>
+	</named-query>	
+
+</entity-mappings>

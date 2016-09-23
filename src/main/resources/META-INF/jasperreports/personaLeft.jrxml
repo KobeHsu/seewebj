@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="personaLeft" pageWidth="420" pageHeight="555" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="420" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="3d00d49b-5d04-40ee-8a61-1c270098b782">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="personaNo" class="java.lang.String"/>
+	<field name="realname" class="java.lang.String"/>
+	<field name="category" class="java.lang.String"/>
+	<field name="background" class="java.lang.String"/>
+	<field name="behavior" class="java.lang.String"/>
+	<detail>
+		<band height="160" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="64" width="420" height="32" uuid="3c472f5e-fbfd-4d11-9af0-28b0a4cfa2f0"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" mode="Transparent" x="80" y="0" width="340" height="32" backcolor="#FFFFFF" uuid="375a03a4-3fa9-4b55-9bbb-d1be50ae0aa9"/>
+					<box topPadding="5" leftPadding="5" rightPadding="5"/>
+					<textElement>
+						<font fontName="微軟正黑體" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{category}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="0" width="80" height="32" backcolor="#FFFFFF" uuid="157b942c-4011-43f0-9db7-12d29d0a0506"/>
+					<box topPadding="5" leftPadding="5" rightPadding="5"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font fontName="微軟正黑體" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[類型:]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="96" width="420" height="32" uuid="b24cb749-9826-4d25-9a0c-32ef0976badc"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" mode="Transparent" x="80" y="0" width="340" height="32" backcolor="#DDFFFF" uuid="02bcb4d7-6bf1-4eff-b5ea-b260a5bf163b"/>
+					<box topPadding="5" leftPadding="5" rightPadding="5"/>
+					<textElement>
+						<font fontName="微軟正黑體" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{background}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Transparent" x="0" y="0" width="80" height="32" backcolor="#DDFFFF" uuid="9ff66c79-46fd-4748-b16d-7d825a0487b2"/>
+					<box topPadding="5" leftPadding="5" rightPadding="5"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font fontName="微軟正黑體" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[背景及態度:]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="128" width="420" height="32" uuid="c0802831-ee6b-45c6-ac7a-db559902409d"/>
+				<staticText>
+					<reportElement mode="Transparent" x="0" y="0" width="80" height="32" backcolor="#DDFFFF" uuid="735469fd-d50f-4e2c-9678-584443fc0441"/>
+					<box topPadding="5" leftPadding="5" rightPadding="5"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font fontName="微軟正黑體" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[行為特質:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement mode="Transparent" x="80" y="0" width="340" height="32" backcolor="#DDFFFF" uuid="5dd0d1a6-ada9-46ee-a426-e421fbf450b1"/>
+					<box topPadding="5" leftPadding="5" rightPadding="5"/>
+					<textElement>
+						<font fontName="微軟正黑體" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{behavior}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="0" width="420" height="32" uuid="bc7e3994-9c55-4f34-a5c8-7aed3cc8292d"/>
+				<staticText>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="80" height="32" backcolor="#FFFFFF" uuid="0d012523-1122-4e7b-b26e-d1ffe921972c"/>
+					<box topPadding="5" leftPadding="5" rightPadding="5"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font fontName="微軟正黑體" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[編號:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="80" y="0" width="340" height="32" backcolor="#FFFFFF" uuid="b9890577-a84f-4578-ac23-3df3d69ff8af"/>
+					<box topPadding="5" leftPadding="5" rightPadding="5"/>
+					<textElement>
+						<font fontName="微軟正黑體" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{personaNo}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="32" width="420" height="32" uuid="8fa21554-c5b8-4743-96c2-42ed1169134e"/>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" mode="Opaque" x="80" y="0" width="340" height="32" backcolor="#FFFFFF" uuid="39aebcaf-e507-4c81-8a17-7be746c68a7d"/>
+					<box topPadding="5" leftPadding="5" rightPadding="5"/>
+					<textElement>
+						<font fontName="微軟正黑體" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{realname}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="80" height="32" backcolor="#FFFFFF" uuid="91e7a98c-d26d-49e2-879d-d555133a1d92"/>
+					<box topPadding="5" leftPadding="5" rightPadding="5"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font fontName="微軟正黑體" size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[姓名:]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

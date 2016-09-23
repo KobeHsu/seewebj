@@ -1,0 +1,8 @@
+{
+	"sEmptyTable": "",
+	"sInfoEmpty": "",
+	"sPrevious": "上一頁",
+	"sNext": "下一頁",
+	"sZeroRecords": "查無資料",
+	"sLengthMenu": "每頁顯示 _MENU_ 筆"
+}

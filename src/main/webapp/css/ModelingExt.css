@@ -1,0 +1,9 @@
+.ModelingSwinglane {
+	z-index: 99;
+	stroke: #AAAAAA;
+	stroke-dasharray: 5, 5;
+	stroke-width: 2;
+	fill: none;
+	cursor: move;
+	position: absolute;
+}

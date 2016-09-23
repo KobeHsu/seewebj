@@ -1,0 +1,31 @@
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+
+<!-- 個案資料管理 -->
+	<definition name="/front/CaseExtraDefinitionManagement" extends=".management">
+		<put-attribute name="title" value="個案資料額外欄位定義" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/datamanagement/CaseExtraDefinitionManagement.jsp" />
+	</definition>
+
+	<definition name="/front/CaseList" extends=".presentation">
+		<put-attribute name="title" value="個案管理" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/datamanagement/CaseList.jsp" />
+		<put-attribute name="left" value="/WEB-INF/jsp/front/datamanagement/CaseListLeftBlock.jsp" />
+	</definition>
+
+	<definition name="/front/NewCase" extends=".presentation">
+		<put-attribute name="title" value="個案管理" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/datamanagement/NewCase.jsp" />
+	</definition>
+
+	<definition name="/front/ViewCase" extends=".presentation">
+		<put-attribute name="title" value="個案管理" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/datamanagement/ViewCase.jsp" />
+	</definition>
+
+	<definition name="/front/EditCase" extends=".presentation">
+		<put-attribute name="title" value="個案管理" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/datamanagement/EditCase.jsp" />
+	</definition>
+
+</tiles-definitions>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="persona" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3d00d49b-5d04-40ee-8a61-1c270098b782">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
+	<field name="SUBREPORT_DATA1" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<field name="SUBREPORT_DATA2" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<detail>
+		<band height="555" splitType="Immediate">
+			<frame>
+				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="802" height="555" backcolor="#66CCFF" uuid="eb4acdd0-626b-4b52-9c9f-0f6ab5dab482"/>
+				<box>
+					<topPen lineWidth="4.0" lineColor="#66CCFF"/>
+					<leftPen lineWidth="4.0" lineColor="#66CCFF"/>
+					<bottomPen lineWidth="4.0" lineColor="#66CCFF"/>
+					<rightPen lineWidth="4.0" lineColor="#66CCFF"/>
+				</box>
+				<subreport>
+					<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="420" y="0" width="382" height="555" uuid="b5322d41-74b3-4d2a-b927-f48611ea45d3"/>
+					<dataSourceExpression><![CDATA[$F{SUBREPORT_DATA2}]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "personaRight.jasper"]]></subreportExpression>
+				</subreport>
+				<subreport>
+					<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="420" height="555" backcolor="#99FFFF" uuid="23e34d98-bb94-4537-9879-84667e752b07"/>
+					<dataSourceExpression><![CDATA[$F{SUBREPORT_DATA1}]]></dataSourceExpression>
+					<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "personaLeft.jasper"]]></subreportExpression>
+				</subreport>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

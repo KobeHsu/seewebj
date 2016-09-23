@@ -1,0 +1,262 @@
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+
+	<definition name=".entire" template="/WEB-INF/jsp/template/entireTemplate.jsp">
+	</definition>
+
+	<definition name=".blank" template="/WEB-INF/jsp/template/blankTemplate.jsp">
+		<put-attribute name="header" value="/WEB-INF/jsp/common/blankHeader.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/jsp/common/footer.jsp" />
+	</definition>
+
+	<definition name=".entrance" template="/WEB-INF/jsp/template/blankTemplate.jsp">
+		<put-attribute name="header" value="/WEB-INF/jsp/common/menuHeader.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/jsp/common/footer.jsp" />
+	</definition>
+
+	<definition name=".wizard" template="/WEB-INF/jsp/template/wizardTemplate.jsp">
+		<put-attribute name="header" value="/WEB-INF/jsp/common/menuHeader.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/jsp/common/footer.jsp" />
+	</definition>
+
+	<definition name=".presentation" template="/WEB-INF/jsp/template/presentationTemplate.jsp">
+		<put-attribute name="content" value="/WEB-INF/jsp/common/content.jsp" />
+		<put-attribute name="left" value="/WEB-INF/jsp/common/left.jsp" />
+		<put-attribute name="right" value="/WEB-INF/jsp/common/right.jsp" />
+	</definition>
+
+	<definition name=".management" template="/WEB-INF/jsp/template/managementTemplate.jsp">
+		<put-attribute name="title" value="Template" type="string" />
+		<put-attribute name="header" value="/WEB-INF/jsp/common/header.jsp" />
+		<put-attribute name="content" value="/WEB-INF/jsp/common/content.jsp" />
+		<put-attribute name="left" value="/WEB-INF/jsp/common/left.jsp" />
+		<put-attribute name="right" value="/WEB-INF/jsp/common/right.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/jsp/common/footer.jsp" />
+	</definition>
+
+
+	<definition name=".model" template="/WEB-INF/jsp/template/modelTemplate.jsp">
+		<put-attribute name="title" value="Template" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/common/content.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/jsp/common/footer.jsp" />
+	</definition>
+	
+	<definition name=".process" template="/WEB-INF/jsp/template/processTemplate.jsp">
+		<put-attribute name="title" value="Template" type="string" />
+		<put-attribute name="header" value="/WEB-INF/jsp/common/header.jsp" />
+		<put-attribute name="content" value="/WEB-INF/jsp/common/content.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/jsp/common/footer.jsp" />
+	</definition>
+	
+	
+	<definition name="/front/Login" extends=".entire">
+		<put-attribute name="title" value="登入" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/Login.jsp" />
+	</definition>
+
+	<definition name="/front/SignAgreement" extends=".blank">
+		<put-attribute name="title" value="簽署個資同意書" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/SignAgreement.jsp" />
+	</definition>
+
+	<definition name="/front/Index" extends=".entrance">
+		<put-attribute name="title" value="資策會服務體驗工程方法平台(S.E.E.)" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/Index.jsp" />
+	</definition>
+
+	<definition name="/front/NewProjectStep1" extends=".wizard">
+		<put-attribute name="title" value="新增專案" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/NewProjectStep1.jsp" />
+	</definition>
+
+	<definition name="/front/NewProjectStep2" extends=".wizard">
+		<put-attribute name="title" value="新增專案" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/NewProjectStep2.jsp" />
+	</definition>
+
+	<definition name="/front/NewProjectStep3" extends=".wizard">
+		<put-attribute name="title" value="新增專案" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/NewProjectStep3.jsp" />
+	</definition>
+
+	<definition name="/front/PersonaList" extends=".presentation">
+		<put-attribute name="title" value="人物角色原型管理" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/PersonaList.jsp" />
+		<put-attribute name="left" value="/WEB-INF/jsp/front/PersonaListLeftBlock.jsp" />
+	</definition>
+	
+	
+	<definition name="/front/NewPersona" extends=".presentation">
+		<put-attribute name="title" value="人物角色原型管理" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/NewPersona.jsp" />
+	</definition>
+
+	<definition name="/front/EditPersona" extends=".presentation">
+		<put-attribute name="title" value="人物角色原型管理" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/EditPersona.jsp" />
+	</definition>
+
+
+	<definition name="/front/ProjectWizard" extends=".management">
+		<put-attribute name="title" value="專案階段及工具設定" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/ProjectWizard.jsp" />
+	</definition>
+
+
+	
+	<definition name="/front/ForumList" extends=".presentation">
+		<put-attribute name="title" value="專案討論區" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/ForumList.jsp" />
+		<put-attribute name="left" value="/WEB-INF/jsp/front/ForumListLeftBlock.jsp" />
+	</definition>	
+
+	<definition name="/front/NewForum" extends=".presentation">
+		<put-attribute name="title" value="專案討論區" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/NewForum.jsp" />
+	</definition>
+
+	<definition name="/front/ViewForum" extends=".presentation">
+		<put-attribute name="title" value="專案討論區" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/ViewForum.jsp" />
+		<put-attribute name="left" value="/WEB-INF/jsp/front/ViewForumLeftBlock.jsp" />
+	</definition>
+
+	<definition name="/front/NewForumThread" extends=".presentation">
+		<put-attribute name="title" value="專案討論區" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/NewForumThread.jsp" />
+	</definition>
+	
+	<definition name="/front/ActivateAccount" extends=".presentation">
+		<put-attribute name="title" value="帳號啟用" type="string" />
+		<put-attribute name="header" value="/WEB-INF/jsp/common/header_blank.jsp" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/ActivateAccount.jsp" />
+	</definition>	
+
+	<definition name="/front/UsibilityTestFormManagement" extends=".management">
+		<put-attribute name="title" value="服務體驗工程平台(S.E.E.) - 表單範本維護" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/UsibilityTestFormManagement.jsp" />
+	</definition>
+
+	<definition name="/front/ViewUsibilityTestFormTemplate" extends=".presentation">
+		<put-attribute name="title" value="服務體驗工程平台(S.E.E.) - 表單範本清單" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/ViewUsibilityTestFormTemplate.jsp" />
+	</definition>
+	
+	<definition name="/front/NewOnlineIssue" extends=".presentation">
+		<put-attribute name="title" value="回報問題" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/NewOnlineIssue.jsp" />
+	</definition>
+
+	<definition name="/front/NewOnlineIssueSuccess" extends=".presentation">
+		<put-attribute name="title" value="回報問題" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/NewOnlineIssueSuccess.jsp" />
+	</definition>
+	
+	<!-- Modeling Tool -->
+
+	<definition name="/front/ServiceInformationInteraction" extends=".model">
+		<put-attribute name="title" value="服務體驗工程平台(S.E.E.) - 服務資訊互動模型" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/ServiceInformationInteraction.jsp" />
+		<put-attribute name="left" value="/WEB-INF/jsp/front/ModelingLeftBlock.jsp" />
+	</definition>	
+
+	<definition name="/front/InnovationEvaluationArchiture" extends=".model">
+		<put-attribute name="title" value="服務體驗工程平台(S.E.E.) - 創新商業評估架構" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/InnovationEvaluationArchiture.jsp" />
+		<put-attribute name="left" value="/WEB-INF/jsp/front/ModelingLeftBlock.jsp" />
+	</definition>
+
+	<definition name="/front/UserInterfaceDesign" extends=".model">
+		<put-attribute name="title" value="服務體驗工程平台(S.E.E.) - 介面設計模型" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/UserInterfaceDesign.jsp" />
+		<put-attribute name="left" value="/WEB-INF/jsp/front/ModelingLeftBlock.jsp" />
+	</definition>
+
+	<definition name="/front/FlowModel" extends=".model">
+		<put-attribute name="modelName" value="FlowModel" type="string" />
+		<put-attribute name="title" value="角色互動模型" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/FlowModel.jsp" />
+		<put-attribute name="left" value="/WEB-INF/jsp/front/ModelingLeftBlock.jsp" />
+		<put-attribute name="tutorial" value="/WEB-INF/jsp/front/FlowModelTutorial.jsp" />
+	</definition>
+
+	<definition name="/front/SequenceModel" extends=".model">
+		<put-attribute name="modelName" value="SequenceModel" type="string" />
+		<put-attribute name="title" value="序列模型" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/SequenceModel.jsp" />
+		<put-attribute name="left" value="/WEB-INF/jsp/front/ModelingLeftBlock.jsp" />
+		<put-attribute name="tutorial" value="/WEB-INF/jsp/front/SequenceModelTutorial.jsp" />
+	</definition>
+
+	<definition name="/front/CultureModel" extends=".model">
+		<put-attribute name="modelName" value="CultureModel" type="string" />
+		<put-attribute name="title" value="文化模型" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/CultureModel.jsp" />
+		<put-attribute name="left" value="/WEB-INF/jsp/front/ModelingLeftBlock.jsp" />
+		<put-attribute name="tutorial" value="/WEB-INF/jsp/front/CultureModelTutorial.jsp" />
+	</definition>
+
+	<definition name="/front/ArtifactModel" extends=".model">
+		<put-attribute name="modelName" value="ArtifactModel" type="string" />
+		<put-attribute name="title" value="工具器物模型" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/ArtifactModel.jsp" />
+		<put-attribute name="left" value="/WEB-INF/jsp/front/ModelingLeftBlock.jsp" />
+		<put-attribute name="tutorial" value="/WEB-INF/jsp/front/ArtifactModelTutorial.jsp" />
+	</definition>
+
+	<definition name="/front/PhysicalModel" extends=".model">
+		<put-attribute name="modelName" value="PhysicalModel" type="string" />
+		<put-attribute name="title" value="實體環境模型" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/PhysicalModel.jsp" />
+		<put-attribute name="left" value="/WEB-INF/jsp/front/ModelingLeftBlock.jsp" />
+		<put-attribute name="tutorial" value="/WEB-INF/jsp/front/PhysicalModelTutorial.jsp" />
+	</definition>
+
+	<definition name="/front/AffinityDiagram" extends=".model">
+		<put-attribute name="modelName" value="AffinityDiagram" type="string" />
+		<put-attribute name="title" value="親和圖" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/AffinityDiagram.jsp" />
+		<put-attribute name="left" value="/WEB-INF/jsp/front/ModelingLeftBlock.jsp" />
+		<put-attribute name="tutorial" value="/WEB-INF/jsp/front/AffinityDiagramTutorial.jsp" />
+	</definition>
+
+	<definition name="/front/CustomerJourney" extends=".model">
+		<put-attribute name="modelName" value="CustomerJourney" type="string" />
+		<put-attribute name="title" value="顧客服務旅程" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/CustomerJourney.jsp" />
+		<put-attribute name="left" value="/WEB-INF/jsp/front/ModelingLeftBlock.jsp" />
+		<put-attribute name="tutorial" value="/WEB-INF/jsp/front/CustomerJourneyTutorial.jsp" />
+	</definition>
+
+	<definition name="/front/ServiceBlueprint" extends=".model">
+		<put-attribute name="modelName" value="ServiceBlueprint" type="string" />
+		<put-attribute name="title" value="服務藍圖" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/ServiceBlueprint.jsp" />
+		<put-attribute name="left" value="/WEB-INF/jsp/front/ModelingLeftBlock.jsp" />
+		<put-attribute name="tutorial" value="/WEB-INF/jsp/front/ServiceBlueprintTutorial.jsp" />
+	</definition>
+
+<!-- 系統管理 -->
+	<definition name="/front/AccountManagement" extends=".management">
+		<put-attribute name="title" value="帳號管理" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/AccountManagement.jsp" />
+	</definition>	
+
+	<definition name="/front/OnlineIssueManagement" extends=".management">
+		<put-attribute name="title" value="線上反映問題管理" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/administration/OnlineIssueManagement.jsp" />
+	</definition>	
+
+<!-- 輔助工具 -->
+	<definition name="/front/AnnouncementList" extends=".presentation">
+		<put-attribute name="title" value="公佈欄" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/auxiliary/AnnouncementList.jsp" />
+		<put-attribute name="left" value="/WEB-INF/jsp/front/auxiliary/AnnouncementListLeftBlock.jsp" />
+	</definition>	
+
+	<definition name="/front/NewProjectAnnouncement" extends=".presentation">
+		<put-attribute name="title" value="公佈欄" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/front/auxiliary/NewProjectAnnouncement.jsp" />
+	</definition>
+
+</tiles-definitions>

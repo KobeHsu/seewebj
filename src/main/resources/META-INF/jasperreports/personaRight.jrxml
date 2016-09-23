@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="persona" pageWidth="382" pageHeight="555" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="382" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="3d00d49b-5d04-40ee-8a61-1c270098b782">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="target" class="java.lang.String"/>
+	<field name="portraitFile" class="java.lang.Object"/>
+	<detail>
+		<band height="555" splitType="Stretch">
+			<image>
+				<reportElement positionType="Float" x="0" y="0" width="382" height="382" uuid="1add3770-5633-4a6c-8a89-c8f3343464fa"/>
+				<box topPadding="5" leftPadding="0" bottomPadding="0" rightPadding="5"/>
+				<imageExpression><![CDATA[$F{portraitFile}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement positionType="Float" mode="Transparent" x="0" y="382" width="382" height="32" uuid="48b30e59-8b87-4756-a45d-3b9b4be74b54"/>
+				<box topPadding="5" leftPadding="5" bottomPadding="5" rightPadding="5"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="微軟正黑體" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[欲達成目標:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" mode="Transparent" x="0" y="414" width="382" height="141" uuid="2a37c931-f814-4bd7-9334-3c86149d092d"/>
+				<box topPadding="0" leftPadding="5" bottomPadding="0" rightPadding="5"/>
+				<textElement>
+					<font fontName="微軟正黑體" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{target}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

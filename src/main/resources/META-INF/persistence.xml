@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+	<persistence-unit name="SEE_PU" transaction-type="RESOURCE_LOCAL">
+		
+		<provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
+		<mapping-file>META-INF/see-jpql.xml</mapping-file>
+		
+		<mapping-file>META-INF/onlineIssue-jpql.xml</mapping-file>
+		<mapping-file>META-INF/tool-jpql.xml</mapping-file>
+		
+		<class>org.iii.see.domain.Member</class>
+		<class>org.iii.see.domain.MemberHistory</class>
+		<class>org.iii.see.domain.MemberHistoryPK</class>
+		<class>org.iii.see.domain.ProjectTemplate</class>
+		<class>org.iii.see.domain.MemberAuditLog</class>
+		<class>org.iii.see.domain.ProjectTemplatePhase</class>
+		<class>org.iii.see.domain.ProjectTemplatePhaseTool</class>
+		<class>org.iii.see.domain.ProjectTemplatePhaseToolPK</class>
+		<class>org.iii.see.domain.Project</class>
+		<class>org.iii.see.domain.ProjectPhase</class>
+		<class>org.iii.see.domain.ProjectPhaseTool</class>
+		<class>org.iii.see.domain.ProjectPhaseToolPK</class>
+		<class>org.iii.see.domain.Tool</class>
+		<class>org.iii.see.domain.ProjectMember</class>
+		<class>org.iii.see.domain.ProjectMemberPK</class>
+		
+		<class>org.iii.see.domain.Account</class>
+		<class>org.iii.see.domain.CaseExtraDefinition</class>
+		<class>org.iii.see.domain.CaseBasicData</class>
+		<class>org.iii.see.domain.CaseExtraData</class>
+		<class>org.iii.see.domain.CasePortraitFile</class>
+		<class>org.iii.see.domain.CaseAttachment</class>
+		<class>org.iii.see.domain.UsibilityTestFormTemplate</class>
+		<class>org.iii.see.domain.PersonaBasicData</class>
+		<class>org.iii.see.domain.PersonaPortraitFile</class>
+		<class>org.iii.see.domain.Forum</class>
+		<class>org.iii.see.domain.ForumThread</class>
+		<class>org.iii.see.domain.ForumThreadReply</class>
+		<class>org.iii.see.domain.ProjectAnnouncement</class>
+		<class>org.iii.see.domain.AccountProject</class>
+		<class>org.iii.see.domain.ModelData</class>
+		<class>org.iii.see.domain.OnlineIssue</class>
+		<class>org.iii.see.domain.OnlineIssueFigure</class>
+				
+		<properties>
+            <property name="openjpa.ConnectionURL" value="jdbc:postgresql://localhost:5432/see"/>
+            <property name="openjpa.jdbc.DBDictionary" value="postgres"/>
+            <property name="openjpa.ConnectionDriverName" value="org.postgresql.Driver"/>
+            <property name="openjpa.ConnectionUserName" value="postgres"/>
+            <property name="openjpa.ConnectionPassword" value="eld168"/>
+            <property name="openjpa.Log" value="DefaultLevel=WARN, Runtime=INFO, Tool=INFO, SQL=TRACE"/>
+
+            <property name="RuntimeUnenhancedClasses" value="unsupported" />            
+             
+   		</properties>                   
+
+	</persistence-unit>
+</persistence>

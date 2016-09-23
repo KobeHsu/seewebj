@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entity-mappings version="1.0" xmlns="http://java.sun.com/xml/ns/persistence/orm" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	
+	<named-query name="AuthenticationService.queryAccount">
+		<query>
+		<![CDATA[
+				SELECT
+				    A
+				FROM
+					Account A
+				WHERE
+					A.account = :account
+				ORDER BY
+				    A.createTime DESC
+		]]>
+		</query>
+	</named-query>
+
+	<named-query name="CaseExtraDefinitionManagement.queryCaseExtraDefinition">
+		<query>
+		<![CDATA[
+				SELECT
+				    C
+				FROM
+					CaseExtraDefinition C
+				WHERE
+					C.projectUuid = :projectUuid
+				ORDER BY
+				    C.serialNo ASC,
+				    C.createTime DESC
+		]]>
+		</query>
+	</named-query>
+
+	<named-query name="CaseManagement.queryCaseList">
+		<query>
+		<![CDATA[
+				SELECT
+				    B.uuid,
+				    B.projectUuid,
+				    B.caseNo,
+				    B.realname,
+				    B.sex,
+				    B.age,
+				    B.businessPhone,
+				    B.mobilePhone,
+				    B.createTime,
+				    P.uuid,
+				    CONCAT(P.uuid, '.', P.extName)
+				FROM
+					CaseBasicData B
+				LEFT JOIN
+					B.casePortraitFile P				
+				WHERE
+					B.projectUuid = :projectUuid
+				ORDER BY
+				    B.caseNo ASC
+		]]>
+		</query>
+	</named-query>
+
+	<named-query name="CaseManagement.checkDuplicateCaseNo">
+		<query>
+		<![CDATA[
+				SELECT
+				    COUNT(C.uuid)
+				FROM
+					CaseBasicData C
+				WHERE
+					C.projectUuid = :projectUuid
+				AND C.caseNo = :caseNo
+		]]>
+		</query>
+	</named-query>
+
+	<named-query name="CaseManagement.queryCaseExtraData">
+		<query>
+		<![CDATA[
+				SELECT
+				    C
+				FROM
+					CaseExtraData C
+				WHERE
+					C.projectUuid = :projectUuid				
+				AND C.dataUuid = :dataUuid
+		]]>
+		</query>
+	</named-query>
+
+	<named-query name="CaseManagement.deleteCaseExtraData">
+		<query>
+		<![CDATA[
+				DELETE
+				FROM
+					CaseExtraData C
+				WHERE
+					C.projectUuid = :projectUuid				
+				AND C.dataUuid = :dataUuid
+		]]>
+		</query>
+	</named-query>
+	
+	<named-query name="CaseManagement.queryCasePortraitFile">
+		<query>
+		<![CDATA[
+				SELECT
+					P
+				FROM
+					CasePortraitFile P
+				WHERE
+					P.dataUuid = :dataUuid
+		]]>
+		</query>
+	</named-query>
+	
+	<named-query name="CaseManagement.deleteCasePortraitFile">
+		<query>
+		<![CDATA[
+				DELETE
+				FROM
+					CasePortraitFile P
+				WHERE
+					P.dataUuid = :dataUuid
+		]]>
+		</query>
+	</named-query>
+	
+	<named-query name="CaseManagement.queryCaseAttachment">
+		<query>
+		<![CDATA[
+				SELECT
+					P
+				FROM
+					CaseAttachment P
+				WHERE
+					P.dataUuid = :dataUuid
+				ORDER BY
+					P.serialNo ASC
+		]]>
+		</query>
+	</named-query>
+
+	<named-query name="CaseManagement.deleteCaseAttachment">
+		<query>
+		<![CDATA[
+				DELETE
+				FROM
+					CaseAttachment P
+				WHERE
+					P.dataUuid = :dataUuid
+		]]>
+		</query>
+	</named-query>
+
+	<named-query name="UsibilityTestFormManagement.queryUsibilityTestFormTemplate">
+		<query>
+		<![CDATA[
+				SELECT
+				    U
+				FROM
+					UsibilityTestFormTemplate U
+				WHERE
+					U.projectUuid = :projectUuid
+				ORDER BY
+				    U.serialNo ASC,
+				    U.createTime DESC
+		]]>
+		</query>
+	</named-query>
+
+	<named-query name="ProjectWizard.queryProjectPhaseList">
+		<query>
+		<![CDATA[
+				SELECT
+				    C
+				FROM
+					ProjectPhase C
+				WHERE
+					C.projectUuid = :projectUuid
+				ORDER BY
+				    C.serialNo ASC,
+				    C.createTime DESC
+		]]>
+		</query>
+	</named-query>
+
+	<named-query name="ProjectWizard.queryToolList">
+		<query>
+		<![CDATA[
+				SELECT
+				    C
+				FROM
+					Tool C
+				ORDER BY
+				    C.name ASC
+		]]>
+		</query>
+	</named-query>
+
+	<named-query name="ProjectWizard.deleteProjectPhaseTool">
+		<query>
+		<![CDATA[
+				DELETE
+				FROM
+					ProjectPhaseTool C
+				WHERE
+					C.phaseUuid = :phaseUuid
+		]]>
+		</query>
+	</named-query>
+
+	<named-query name="ProjectWizard.queryPhaseToolUuidList">
+		<query>
+		<![CDATA[
+				SELECT
+				    C.toolUuid
+				FROM
+					ProjectPhaseTool C
+				WHERE
+					C.phaseUuid = :phaseUuid 
+		]]>
+		</query>
+	</named-query>
+
+	<named-query name="ProjectWizard.queryProjectToolUuidList">
+		<query>
+		<![CDATA[
+				SELECT
+					C.phaseUuid,
+					T.uuid,
+				    T.name,
+				    T.url
+				FROM
+					ProjectPhaseTool C, Tool T
+				WHERE
+					C.projectUuid = :projectUuid
+				AND	C.toolUuid = T.uuid
+				ORDER BY
+				 	C.phaseUuid,
+				 	C.serialNo
+		]]>
+		</query>
+	</named-query>
+
+	<named-query name="PersonaManagement.queryPersonaList">
+		<query>
+		<![CDATA[
+				SELECT
+				    B.uuid,
+				    B.projectUuid,
+				    B.personaNo,
+				    B.realname,
+				    B.category,
+				    B.background,
+				    B.behavior,
+				    B.target,
+				    B.createTime,
+				    P.uuid,
+				    CONCAT(P.uuid, '.', P.extName)
+				FROM
+					PersonaBasicData B
+				LEFT JOIN
+					B.personaPortraitFile P				
+				WHERE
+					B.projectUuid = :projectUuid
+				ORDER BY
+				    B.personaNo ASC
+		]]>
+		</query>
+	</named-query>
+
+	<named-query name="PersonaManagement.deletePersonaPortraitFile">
+		<query>
+		<![CDATA[
+				DELETE
+				FROM
+					PersonaPortraitFile P
+				WHERE
+					P.dataUuid = :dataUuid
+		]]>
+		</query>
+	</named-query>
+
+	<named-query name="PersonaManagement.queryPersonaPortraitFile">
+		<query>
+		<![CDATA[
+				SELECT
+					P
+				FROM
+					PersonaPortraitFile P
+				WHERE
+					P.dataUuid = :dataUuid
+		]]>
+		</query>
+	</named-query>
+
+	<named-query name="PersonaManagement.checkDuplicatePersonaNo">
+		<query>
+		<![CDATA[
+				SELECT
+				    COUNT(C.uuid)
+				FROM
+					PersonaBasicData C
+				WHERE
+					C.projectUuid = :projectUuid
+				AND C.personaNo = :personaNo
+		]]>
+		</query>
+	</named-query>
+
+	<named-query name="ForumManagement.queryForumList">
+		<query>
+		<![CDATA[
+				SELECT
+				    B.uuid,
+				    B.projectUuid,
+				    B.title,
+				    B.summary,
+				    B.status
+				FROM
+					Forum B
+				WHERE
+					B.projectUuid = :projectUuid
+				ORDER BY
+				    B.serialNo ASC
+		]]>
+		</query>
+	</named-query>
+
+	<named-query name="ForumManagement.queryForumThreadList">
+		<query>
+		<![CDATA[
+				SELECT
+				    B
+				FROM
+					ForumThread B
+				WHERE
+					B.forumUuid = :forumUuid
+				ORDER BY
+				    B.createTime ASC
+		]]>
+		</query>
+	</named-query>
+
+	<named-query name="AnnouncementManagement.queryAnnouncementList">
+		<query>
+		<![CDATA[
+				SELECT
+				    B.uuid,
+				    B.projectUuid,
+				    B.title,
+				    B.summary,
+				    B.status
+				FROM
+					ProjectAnnouncement B
+				WHERE
+					B.projectUuid = :projectUuid
+				ORDER BY
+				    B.serialNo ASC
+		]]>
+		</query>
+	</named-query>
+
+	<named-query name="AccountManagement.queryAccount">
+		<query>
+		<![CDATA[
+				SELECT
+					M.uuid,
+					M.account,
+					M.realname,
+					M.status
+				FROM
+					Account M
+				WHERE
+				    (0 = :by_account OR M.account like :account)
+				AND (0 = :by_realname OR M.realname like :realname)
+				AND (0 = :by_status OR M.status = :status)
+				ORDER BY
+				    M.createTime ASC,
+					M.account ASC
+		]]>					
+		</query>
+	</named-query>
+		
+	<named-query name="AccountManagement.queryAccountCount">
+		<query>
+		<![CDATA[
+				SELECT
+					COUNT(M.uuid)
+				FROM
+					Account M
+				WHERE
+					(0 = :by_account OR M.account like :account)
+				AND (0 = :by_realname OR M.realname like :realname)
+				AND (0 = :by_status OR M.status = :status)
+		]]>					
+		</query>
+	</named-query>
+
+	<named-query name="Project.queryAccoutnProjectList">
+		<query>
+		<![CDATA[
+				SELECT
+				    C.uuid,
+				    C.name
+				FROM
+					Account A, AccountProject B, Project C
+				WHERE
+					A.uuid = :accountUuid
+				AND A.uuid = B.accountUuid
+				AND B.projectUuid = C.uuid				
+				ORDER BY
+				    C.createTime DESC
+		]]>
+		</query>
+	</named-query>
+
+	<named-query name="ModelIOService.queryModelListByTypeAndName">
+		<query>
+		<![CDATA[
+				SELECT
+					M
+				FROM
+					ModelData M
+				WHERE
+					M.type = :type
+				AND
+					M.name = :name
+		]]>
+		</query>
+	</named-query>
+	
+	<named-query name="ModelIOService.queryModelListByType">
+		<query>
+		<![CDATA[
+				SELECT
+					M
+				FROM
+					ModelData M
+				WHERE
+					M.type = :type
+		]]>
+		</query>
+	</named-query>
+
+</entity-mappings>
