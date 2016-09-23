@@ -377,18 +377,22 @@ function correctRectXY(grp, rect) {
 
     var label = g.select("#" + grp + "label");
     var labelXY = getElementXYofBBox(bBox, "label");
-    label.transform("translate(0 0)");
-    label.attr("x", labelXY[0]);
-    label.attr("y", labelXY[1]);
-    label.selectAll("div>div").forEach(function (item) {
-        item.node.style.width = labelXY[2] - 10 + "px";
-    });
+    if (label) {
+        label.transform("translate(0 0)");
+        label.attr("x", labelXY[0]);
+        label.attr("y", labelXY[1]);
+        label.selectAll("div>div").forEach(function (item) {
+            item.node.style.width = labelXY[2] - 10 + "px";
+        });
+    }
 
     var selected = gSvg.select("#" + grp + "selected");
     var selectedXY = getElementXYofRect(bBoxX, bBoxY, "selected", rectId);
-    selected.transform("translate(0 0)");
-    selected.attr("x", selectedXY[0]);
-    selected.attr("y", selectedXY[1]);
+    if(selected) {
+        selected.transform("translate(0 0)");
+        selected.attr("x", selectedXY[0]);
+        selected.attr("y", selectedXY[1]);
+    }
 
 }
 
@@ -3107,7 +3111,8 @@ function svgElToBack() {
 function newDraw() {
     gSvg.node.innerHTML = "";
     document.getElementById("loadedModel").value = "";
-    document.getElementById("uuid").value = "";    
+    document.getElementById("uuid").value = "";
+    gCurrent = "";
     initModeling(gModelType);
 }
 
@@ -3618,8 +3623,11 @@ function getElementXYofBBox(bBox, elName) {
 
         var newY = bBoxY + height / 2;
         if (gCurrent) {
-            var itemsHeight = gSvg.select("#" + gCurrent + "label>div").node.scrollHeight;
-            newY = newY - itemsHeight / 2;
+            var findDiv = gSvg.select("#" + gCurrent + "label>div");
+            if (findDiv) {
+                var itemsHeight = gSvg.select("#" + gCurrent + "label>div").node.scrollHeight;
+                newY = newY - itemsHeight / 2;
+            }
         }
 
         xy.push(newY);
@@ -4310,9 +4318,11 @@ function textDblClick(e) {
     var grp = getGroupPrefix(e.target.id);
     var label = gSvg.select("#" + grp + "label>div");
 
-    var items = label.selectAll("div,li");
-    if (items && items.length > 0) {
-        items[0].node.focus();
+    if (label) {
+        var items = label.selectAll("div,li");
+        if (items && items.length > 0) {
+            items[0].node.focus();
+        }
     }
 
     //var input = label.select("div>div");

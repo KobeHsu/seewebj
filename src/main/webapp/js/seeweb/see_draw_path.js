@@ -284,11 +284,34 @@ function endPointMouseMove() {
     var x = event.clientX - gStartX;
     var y = event.clientY - gStartY;
 
-    midPoint.attr("cx", x);
-    midPoint.attr("cy", y);
+    if (midPoint) {
+        midPoint.attr("cx", x);
+        midPoint.attr("cy", y);
+    }
 
-    var idx = parseInt(gCurrent.substr(gCurrent.lastIndexOf(SEPARATOR) + 1), 10);
+    var gCurrStr = gCurrent;
+    var pos = -1;
+    if (gCurrStr){
 
+        pos = gCurrStr.lastIndexOf(SEPARATOR);
+        while (pos >= 0) {
+
+            if (pos < gCurrStr.length - 1) {
+                break;
+            }
+
+            gCurrStr = gCurrStr.substring(0, pos);
+            pos = gCurrStr.lastIndexOf(SEPARATOR);
+
+        }
+
+    }
+
+    if (pos<0) {
+        return;
+    }
+
+    var idx = parseInt(gCurrent.substr(pos + 1), 10);
 
     var grp = getGroupPrefix(gCurrent);
     var conn = gSvg.select("#" + grp + "connector");
@@ -347,17 +370,19 @@ function endPointMouseUp() {
 
         var midPoint = gSvg.select("#" + gCurrent);
 
-        var x = midPoint.data("mousedown-x");
-        var y = midPoint.data("mousedown-y");
+        if (midPoint) {
+            var x = midPoint.data("mousedown-x");
+            var y = midPoint.data("mousedown-y");
 
-        //if (x != event.clientX || y != event.clientY) {
-        //    //endPointRemove(midPoint.attr("id"));
-        //    if (gCurrent.indexOf("_mid_")>0) {
-        //        midPointMouseDown(gCurrent);
-        //    }
-        //}
+            //if (x != event.clientX || y != event.clientY) {
+            //    //endPointRemove(midPoint.attr("id"));
+            //    if (gCurrent.indexOf("_mid_")>0) {
+            //        midPointMouseDown(gCurrent);
+            //    }
+            //}
 
-        midPoint.removeClass("toFront");
+            midPoint.removeClass("toFront");
+        }
 
         var grp = getGroupPrefix(gCurrent);
         var conn = gSvg.select("#" + grp + "connector");
