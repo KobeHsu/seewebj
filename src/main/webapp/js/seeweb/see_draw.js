@@ -63,6 +63,8 @@ var SUPPORTED_FONT_SIZES = [12, 14, 18, 22];
 var CONTEXT_MENU_SHIFT_X = -5;
 var CONTEXT_MENU_SHIFT_Y = -5;
 
+var RESIZE_BY_RATIO = true;
+
 var gSerialNo = 0;
 
 var gDrawArea;
@@ -144,9 +146,7 @@ function CustomData(x, y, svgEl, overwrite) {
 
     if (overwrite !== undefined && typeof(overwrite) == "object") {
         for (var key in overwrite) {
-
             this[key] = overwrite[key];
-
         }
     }
 
@@ -421,6 +421,20 @@ function rectMove(myData, eventTarget, e) {
         selected.attr("y", e.clientY - gStartY);
         selected.attr("height", newHeight);
 
+        if (RESIZE_BY_RATIO) {
+
+            var newWidth = myData.w * newHeight / myData.h;
+            var newX = myData.x1 - (newWidth - myData.w) / 2;
+
+            svgEl.attr("x", newX);
+            svgEl.attr("width", newWidth);
+
+            selected.attr("x", newX);
+            selected.attr("width", newWidth);
+
+        }
+
+
     } else if ("s" == gDragAnchorPos) {
 
         var dx = 0; // e.clientX - myData.x;
@@ -441,6 +455,19 @@ function rectMove(myData, eventTarget, e) {
 
         var selected = gSvg.select("#" + gCurrent + "selected");
         selected.attr("height", newHeight);
+
+        if (RESIZE_BY_RATIO) {
+
+            var newWidth = myData.w * newHeight / myData.h;
+            var newX = myData.x1 - (newWidth - myData.w) / 2;
+
+            svgEl.attr("x", newX);
+            svgEl.attr("width", newWidth);
+
+            selected.attr("x", newX);
+            selected.attr("width", newWidth);
+
+        }
 
     } else if ("w" == gDragAnchorPos) {
 
@@ -465,6 +492,19 @@ function rectMove(myData, eventTarget, e) {
         selected.attr("x", e.clientX - gStartX);
         selected.attr("width", newWidth);
 
+        if (RESIZE_BY_RATIO) {
+
+            var newHeight = myData.h * newWidth / myData.w;
+            var newY = myData.y1 - (newHeight - myData.h) / 2;
+
+            svgEl.attr("y", newY);
+            svgEl.attr("height", newHeight);
+
+            selected.attr("y", newY);
+            selected.attr("height", newHeight);
+
+        }
+
     } else if ("e" == gDragAnchorPos) {
 
         var dx = e.clientX - myData.x;
@@ -485,6 +525,19 @@ function rectMove(myData, eventTarget, e) {
 
         var selected = gSvg.select("#" + gCurrent + "selected");
         selected.attr("width", newWidth);
+
+        if (RESIZE_BY_RATIO) {
+
+            var newHeight = myData.h * newWidth / myData.w;
+            var newY = myData.y1 - (newHeight - myData.h) / 2;
+
+            svgEl.attr("y", newY);
+            svgEl.attr("height", newHeight);
+
+            selected.attr("y", newY);
+            selected.attr("height", newHeight);
+
+        }
 
     }
 
@@ -723,6 +776,17 @@ function ellipseMove(myData, eventTarget, e) {
         selected.attr("y", svgEl.getBBox().y);
         selected.attr("height", svgEl.getBBox().height);
 
+        if (RESIZE_BY_RATIO) {
+
+            var newRx = myData.rx * newRy / myData.ry;
+
+            svgEl.attr("rx", newRx);
+
+            selected.attr("x", svgEl.getBBox().x);
+            selected.attr("width", svgEl.getBBox().width);
+
+        }
+
     } else if ("s" == gDragAnchorPos) {
 
         var dx = 0; // e.clientX - x;
@@ -745,6 +809,17 @@ function ellipseMove(myData, eventTarget, e) {
 
         var selected = gSvg.select("#" + gCurrent + "selected");
         selected.attr("height", svgEl.getBBox().height);
+
+        if (RESIZE_BY_RATIO) {
+
+            var newRx = myData.rx * newRy / myData.ry;
+
+            svgEl.attr("rx", newRx);
+
+            selected.attr("x", svgEl.getBBox().x);
+            selected.attr("width", svgEl.getBBox().width);
+
+        }
 
     } else if ("w" == gDragAnchorPos) {
 
@@ -770,6 +845,17 @@ function ellipseMove(myData, eventTarget, e) {
         selected.attr("x", svgEl.getBBox().x);
         selected.attr("width", svgEl.getBBox().width);
 
+        if (RESIZE_BY_RATIO) {
+
+            var newRy = myData.ry * newRx / myData.rx;
+
+            svgEl.attr("ry", newRy);
+
+            selected.attr("y", svgEl.getBBox().y);
+            selected.attr("height", svgEl.getBBox().height);
+
+        }
+
     } else if ("e" == gDragAnchorPos) {
 
         var dx = e.clientX - myData.x;
@@ -792,6 +878,18 @@ function ellipseMove(myData, eventTarget, e) {
 
         var selected = gSvg.select("#" + gCurrent + "selected");
         selected.attr("width", svgEl.getBBox().width);
+
+
+        if (RESIZE_BY_RATIO) {
+
+            var newRy = myData.ry * newRx / myData.rx;
+
+            svgEl.attr("ry", newRy);
+
+            selected.attr("y", svgEl.getBBox().y);
+            selected.attr("height", svgEl.getBBox().height);
+
+        }
 
     }
 
@@ -2326,6 +2424,19 @@ function customMove(myData, eventTarget, e) {
         var pathLen = pathAry.length;
 
         var newPath = "";
+
+        var newWidth;
+        var newX;
+        if (RESIZE_BY_RATIO) {
+
+            newWidth = newHeight * myData.w / myData.h;
+            newX = (e.clientX - gStartX) - (newWidth / 2);
+
+            selected.attr("x", newX);
+            selected.attr("width", newWidth);
+
+        }
+
         for (var i = 0; i < pathLen; i++) {
 
             var act = pathAry[i][0];
@@ -2335,8 +2446,15 @@ function customMove(myData, eventTarget, e) {
                 //var lineToY = pathAry[i][2];
 
                 newPath += act + " ";
-                newPath += lineToX + " ";
+
+                if (RESIZE_BY_RATIO) {
+                    newPath += newX + (gRatioAry[i][0] * newWidth) + " ";
+                } else {
+                    newPath += lineToX + " ";
+                }
+
                 newPath += newY + (gRatioAry[i][1] * newHeight) + " ";
+
             } else {
                 newPath += act;
             }
@@ -2371,6 +2489,19 @@ function customMove(myData, eventTarget, e) {
         var pathLen = pathAry.length;
 
         var newPath = "";
+
+        var newWidth;
+        var newX;
+        if (RESIZE_BY_RATIO) {
+
+            newWidth = newHeight * myData.w / myData.h;
+            newX = (e.clientX - gStartX) - (newWidth / 2);
+
+            selected.attr("x", newX);
+            selected.attr("width", newWidth);
+
+        }
+
         for (var i = 0; i < pathLen; i++) {
 
             var act = pathAry[i][0];
@@ -2380,8 +2511,15 @@ function customMove(myData, eventTarget, e) {
                 //var lineToY = pathAry[i][2];
 
                 newPath += act + " ";
-                newPath += lineToX + " ";
+
+                if (RESIZE_BY_RATIO) {
+                    newPath += newX + (gRatioAry[i][0] * newWidth) + " ";
+                } else {
+                    newPath += lineToX + " ";
+                }
+
                 newPath += newY + (gRatioAry[i][1] * newHeight) + " ";
+
             } else {
                 newPath += act;
             }
@@ -2416,6 +2554,19 @@ function customMove(myData, eventTarget, e) {
         var pathLen = pathAry.length;
 
         var newPath = "";
+
+        var newHeight;
+        var newY;
+        if (RESIZE_BY_RATIO) {
+
+            newHeight = newWidth * myData.h / myData.w;
+            newY = (e.clientY - gStartY) - (newHeight / 2);
+
+            selected.attr("y", newY);
+            selected.attr("height", newHeight);
+
+        }
+
         for (var i = 0; i < pathLen; i++) {
 
             var act = pathAry[i][0];
@@ -2426,7 +2577,13 @@ function customMove(myData, eventTarget, e) {
 
                 newPath += act + " ";
                 newPath += newX + (gRatioAry[i][0] * newWidth) + " ";
-                newPath += lineToY + " ";
+
+                if (RESIZE_BY_RATIO) {
+                    newPath += newY + (gRatioAry[i][1] * newHeight) + " ";
+                } else {
+                    newPath += lineToY + " ";
+                }
+
             } else {
                 newPath += act;
             }
@@ -2461,6 +2618,19 @@ function customMove(myData, eventTarget, e) {
         var pathLen = pathAry.length;
 
         var newPath = "";
+
+        var newHeight;
+        var newY;
+        if (RESIZE_BY_RATIO) {
+
+            newHeight = newWidth * myData.h / myData.w;
+            newY = (e.clientY - gStartY) - (newHeight / 2);
+
+            selected.attr("y", newY);
+            selected.attr("height", newHeight);
+
+        }
+
         for (var i = 0; i < pathLen; i++) {
 
             var act = pathAry[i][0];
@@ -2471,7 +2641,13 @@ function customMove(myData, eventTarget, e) {
 
                 newPath += act + " ";
                 newPath += newX + (gRatioAry[i][0] * newWidth) + " ";
-                newPath += lineToY + " ";
+
+                if (RESIZE_BY_RATIO) {
+                    newPath += newY + (gRatioAry[i][1] * newHeight) + " ";
+                } else {
+                    newPath += lineToY + " ";
+                }
+
             } else {
                 newPath += act;
             }
