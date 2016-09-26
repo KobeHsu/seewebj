@@ -209,14 +209,24 @@ function addRect(type) {
     var rectId = grp + "rect";
     var newRect;
 
+    var initX = 10;
+    var initY = 10;
+    var allRect = gSvg.selectAll("rect");
+    for (var i = 0; i < allRect.length; i++) {
+        if (initX == allRect[i].attr("x") && initY == allRect[i].attr("y")) {
+            initX += 10;
+            initY += 10;
+        }
+    }
+
     if ('small' == type) {
-        newRect = gSvg.rect(10, 10, RECT_WIDTH_SM, RECT_HEIGHT_SM, 5, 5);
+        newRect = gSvg.rect(initX, initY, RECT_WIDTH_SM, RECT_HEIGHT_SM, 5, 5);
         newRect.addClass("myRect2");
     } else if ('noLabel' == type) {
-        newRect = gSvg.rect(10, 10, RECT_WIDTH, RECT_HEIGHT, 5, 5);
+        newRect = gSvg.rect(initX, initY, RECT_WIDTH, RECT_HEIGHT, 5, 5);
         newRect.addClass("myRect3");
     } else {
-        newRect = gSvg.rect(10, 10, RECT_WIDTH, RECT_HEIGHT, 5, 5);
+        newRect = gSvg.rect(initX, initY, RECT_WIDTH, RECT_HEIGHT, 5, 5);
         newRect.addClass("myRect");
     }
     if ("dash" == type) {
@@ -553,12 +563,30 @@ function addEllipse(type) {
     var ellipseId = grp + "ellipse";
     var newEllipse;
 
+    var initCx = ELLIPSE_RX + 10;
+    var initCy = ELLIPSE_RY + 10;
     if (type === 'circle') {
-        newEllipse = gSvg.ellipse(CIRCLE_RX + 10, CIRCLE_RY + 10, CIRCLE_RX, CIRCLE_RY);
+        initCx = CIRCLE_RX + 10;
+        initCy = CIRCLE_RY + 10;
     } else if (type === 'xs-circle') {
-        newEllipse = gSvg.ellipse(XS_CIRCLE_RX + 10, XS_CIRCLE_RY + 10, XS_CIRCLE_RX, XS_CIRCLE_RY);
+        initCx = XS_CIRCLE_RX + 10;
+        initCy = XS_CIRCLE_RY + 10;
+    }
+
+    var allEllipse = gSvg.selectAll("ellipse");
+    for (var i = 0; i < allEllipse.length; i++) {
+        if (initCx == allEllipse[i].attr("cx") && initCy == allEllipse[i].attr("cy")) {
+            initCx += 10;
+            initCy += 10;
+        }
+    }
+
+    if (type === 'circle') {
+        newEllipse = gSvg.ellipse(initCx, initCy, CIRCLE_RX, CIRCLE_RY);
+    } else if (type === 'xs-circle') {
+        newEllipse = gSvg.ellipse(initCx, initCy, XS_CIRCLE_RX, XS_CIRCLE_RY);
     } else {
-        newEllipse = gSvg.ellipse(ELLIPSE_RX + 10, ELLIPSE_RY + 10, ELLIPSE_RX, ELLIPSE_RY);
+        newEllipse = gSvg.ellipse(initCx, initCy, ELLIPSE_RX, ELLIPSE_RY);
     }
     newEllipse.addClass("myEllipse");
     newEllipse.attr("id", ellipseId);
@@ -2193,6 +2221,8 @@ var CUSTOM_DEF = {
 
 function addCustom(customDef) {
 
+    var allRect = gSvg.selectAll("rect");
+
     var grp = getGroupPrefix(gSerialNo);
     var customId = grp + "custom";
 
@@ -2275,6 +2305,24 @@ function addCustom(customDef) {
 
     setSelected(grp);
     gCurrent = grp;
+
+    var boxX = selected.getBBox().x;
+    var boxY = selected.getBBox().y;
+    for (var i = 0; i < allRect.length; i++) {
+        if (boxX == allRect[i].attr("x") && boxY == allRect[i].attr("y")) {
+
+            var myMatrix = new Snap.Matrix();
+            myMatrix.translate(10, 10);
+            g.transform(myMatrix);
+            gDragAnchor = "custom";
+            svgElMouseUp();
+
+            boxX = selected.getBBox().x;
+            boxY = selected.getBBox().y;
+
+        }
+    }
+
 
 }
 
