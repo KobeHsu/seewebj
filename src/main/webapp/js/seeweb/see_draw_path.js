@@ -13,6 +13,8 @@
 
 function addConnector(type) {
 
+    var allConn = gSvg.selectAll("path[id$='connector']");
+
     var grp = getGroupPrefix(gSerialNo);
     var connectorId = grp + "connector";
 
@@ -66,6 +68,29 @@ function addConnector(type) {
 
     setSelected(grp);
     gCurrent = grp;
+
+    var boxX = bBoxConn.x;
+    var boxY = bBoxConn.y;
+
+    for (var i = 0; i < allConn.length; i++) {
+
+        if (boxX == allConn[i].getBBox().x && boxY == allConn[i].getBBox().y) {
+
+            var myMatrix = new Snap.Matrix();
+            myMatrix.translate(10, 10);
+            g.transform(myMatrix);
+
+            correctConnectorXY(grp, newConn);
+
+            boxX += 10;
+            boxY += 10;
+
+
+        }
+
+    }
+
+
 }
 
 function getElementXYofConn(bBox, elName) {
