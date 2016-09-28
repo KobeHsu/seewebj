@@ -11,16 +11,24 @@
 //
 //}
 
-function addConnector(type) {
+function addConnector(type, labelText, startY) {
 
     var allConn = gSvg.selectAll("path[id$='connector']");
 
     var grp = getGroupPrefix(gSerialNo);
     var connectorId = grp + "connector";
 
-    var newConn = gSvg.path("M 10 60 L 110 60");
+    var newConn;
+    if (startY) {
+        newConn = gSvg.path("M 0 " + startY + " L " + $('#drawArea').width() + " " + startY);
+    } else {
+        newConn = gSvg.path("M 10 60 L 110 60");
+    }
+
     if ('route' == type) {
         newConn.addClass("myConnector2");
+    } else if ("SwingLane" == type) {
+        newConn.addClass("ModelingSwinglane");
     } else {
         newConn.addClass("myConnector");
     }
@@ -53,6 +61,9 @@ function addConnector(type) {
     var labelXY = getElementXYofConn(selected.getBBox(), "text", targetPoint.x - 20, targetPoint.y - 20);
     var label = initLabelForElement(bBoxConn, grp, labelXY[0], labelXY[1]);
 
+    if (labelText) {
+        label.select("div div").node.innerHTML = labelText;
+    }
     //newConn.dblclick(textDblClick);
 
     var g = gSvg.g(newConn, close, selected, label);
@@ -84,7 +95,6 @@ function addConnector(type) {
 
             boxX += 10;
             boxY += 10;
-
 
         }
 
@@ -213,7 +223,8 @@ function correctConnectorXY(grp, conn) {
     //text.dblclick(textDblClick);
 
     // handle arrow
-    if ("undirected" !== g.attr("type")) {
+    var type = g.attr("type");
+    if ("undirected" !== type && "SwingLane" !== type) {
 
         var arrow = gSvg.select("[id^='" + grp + "arrow']");
 
@@ -524,7 +535,7 @@ function reDrawPointByPath(grp, conn, g) {
 
         var len = 0;
 
-        if (i > 0) {
+        if (i > 0 && "SwingLane" != type) {
 
             var dx = pathAry[i][1] - pathAry[i - 1][1];
             var dy = pathAry[i][2] - pathAry[i - 1][2];
@@ -552,7 +563,7 @@ function reDrawPointByPath(grp, conn, g) {
     }
 
     // draw arrow
-    if (lastSubPath.length == 4 && type !== "undirected") {
+    if (lastSubPath.length == 4 && ("undirected" !== type && "SwingLane" != type)) {
 
         var arrowId = grp + "arrow";
 
