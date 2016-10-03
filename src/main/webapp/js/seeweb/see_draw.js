@@ -63,7 +63,7 @@ var SUPPORTED_FONT_SIZES = [12, 14, 18, 22];
 var CONTEXT_MENU_SHIFT_X = -5;
 var CONTEXT_MENU_SHIFT_Y = -5;
 
-var RESIZE_BY_RATIO = true;
+var RESIZE_BY_RATIO = false;
 
 var gSerialNo = 0;
 
@@ -196,6 +196,11 @@ function getElementXYofRect(bBoxX, bBoxY, elName, rectId) {
         xy.push(bBoxX);
         xy.push(bBoxY);
 
+    } else if ("rResize" == elName) {
+
+        xy.push(bBoxX + width);
+        xy.push(bBoxY + height);
+
     }
 
     return xy;
@@ -274,9 +279,16 @@ function addRect(type) {
     eResize.addClass("hide");
     eResize.attr("id", eResizeId);
 
+    var rResizeId = grp + "rResize";
+    var rResizeXY = getElementXYofRect(bBoxRect.x, bBoxRect.y, "rResize", rectId);
+    var rResize = gSvg.circle(rResizeXY[0], rResizeXY[1], CIRCLE_R);
+    rResize.addClass("myRResize");
+    rResize.addClass("hide");
+    rResize.attr("id", rResizeId);
+
     var label = initLabelForElement(bBoxRect, grp);
 
-    var g = gSvg.g(newRect, close, nResize, sResize, wResize, eResize, selected, label);
+    var g = gSvg.g(newRect, close, nResize, sResize, wResize, eResize, rResize, selected, label);
     g.attr("id", grpId);
 
     registerListener(rectId);
@@ -377,6 +389,13 @@ function correctRectXY(grp, rect) {
     eResize.transform("translate(0 0)");
     eResize.attr("cx", eResizeXY[0]);
     eResize.attr("cy", eResizeXY[1]);
+
+    var rResize = gSvg.select("#" + grp + "rResize");
+    var rResizeXY = getElementXYofRect(bBoxX, bBoxY, "rResize", rectId);
+
+    rResize.transform("translate(0 0)");
+    rResize.attr("cx", rResizeXY[0]);
+    rResize.attr("cy", rResizeXY[1]);
 
     //var text = gSvg.select("#" + grp + "text");
     //var textXY = getElementXYofRect(bBoxX, bBoxY, "text", rectId);
@@ -548,6 +567,36 @@ function rectMove(myData, eventTarget, e) {
             selected.attr("height", newHeight);
 
         }
+
+    } else if ("r" == gDragAnchorPos) {
+
+        var dx = e.clientX - myData.x;
+        var dy = 0; // e.clientY - myData.y;
+
+        var newWidth = myData.w + dx;
+        if (newWidth < RECT_WIDTH) {
+            return;
+        }
+
+        var myMatrix = new Snap.Matrix();
+        myMatrix.translate(dx, dy);
+
+        eventTarget.transform(myMatrix);
+
+        var svgEl = gSvg.select("#" + gCurrent + gDragType);
+        svgEl.attr("width", newWidth);
+
+        var selected = gSvg.select("#" + gCurrent + "selected");
+        selected.attr("width", newWidth);
+
+        var newHeight = myData.h * newWidth / myData.w;
+        var newY = myData.y1 - (newHeight - myData.h) / 2;
+
+        svgEl.attr("y", newY);
+        svgEl.attr("height", newHeight);
+
+        selected.attr("y", newY);
+        selected.attr("height", newHeight);
 
     }
 
@@ -3141,6 +3190,7 @@ function setSelected(grp, grpOld) {
     showElementById(grp + "sResize");
     showElementById(grp + "wResize");
     showElementById(grp + "eResize");
+    showElementById(grp + "rResize");
 
     gSvg.selectAll("[id^='" + grp + "point']").forEach(function (element) {
         showElement(element);

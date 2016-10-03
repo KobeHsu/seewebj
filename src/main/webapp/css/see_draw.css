@@ -149,6 +149,13 @@ input[type="text"].focus {
     z-index: 20;
 }
 
+.myRResize {
+    stroke: black;
+    fill: lightgrey;
+    cursor: nwse-resize;
+    z-index: 20;
+}
+
 .myMidPoint {
     fill: #FFFFFF;
     stroke: grey;
