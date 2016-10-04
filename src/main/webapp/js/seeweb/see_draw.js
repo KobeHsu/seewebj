@@ -571,7 +571,7 @@ function rectMove(myData, eventTarget, e) {
     } else if ("r" == gDragAnchorPos) {
 
         var dx = e.clientX - myData.x;
-        var dy = 0; // e.clientY - myData.y;
+        var dy = e.clientY - myData.y;
 
         var newWidth = myData.w + dx;
         if (newWidth < RECT_WIDTH) {
@@ -678,9 +678,16 @@ function addEllipse(type) {
     eResize.addClass("hide");
     eResize.attr("id", eResizeId);
 
+    var rResizeId = grp + "rResize";
+    var rResizeXY = getElementXYofEllipse(bBoxEllipse.x, bBoxEllipse.y, "rResize", ellipseId);
+    var rResize = gSvg.circle(rResizeXY[0], rResizeXY[1], CIRCLE_R);
+    rResize.addClass("myRResize");
+    rResize.addClass("hide");
+    rResize.attr("id", rResizeId);
+
     var label = initLabelForElement(bBoxEllipse, grp);
 
-    var g = gSvg.g(newEllipse, close, nResize, sResize, wResize, eResize, selected, label);
+    var g = gSvg.g(newEllipse, close, nResize, sResize, wResize, eResize, rResize, selected, label);
     g.attr("id", grpId);
 
     registerListener(ellipseId);
@@ -734,6 +741,11 @@ function getElementXYofEllipse(bBoxX, bBoxY, elName, ellipseId) {
 
         xy.push(bBoxX);
         xy.push(bBoxY);
+
+    } else if ("rResize" == elName) {
+
+        xy.push(bBoxX + rx * 2);
+        xy.push(bBoxY + ry * 2);
 
     }
 
@@ -803,6 +815,13 @@ function correctEllipseXY(grp, ellipse) {
     eResize.transform("translate(0 0)");
     eResize.attr("cx", eResizeXY[0]);
     eResize.attr("cy", eResizeXY[1]);
+
+    var rResize = gSvg.select("#" + grp + "rResize");
+    var rResizeXY = getElementXYofEllipse(bBoxEllipse.x, bBoxEllipse.y, "rResize", ellipseId);
+
+    rResize.transform("translate(0 0)");
+    rResize.attr("cx", rResizeXY[0]);
+    rResize.attr("cy", rResizeXY[1]);
 
     //var text = gSvg.select("#" + grp + "text");
     //var textXY = getElementXYofEllipse(bBoxEllipse.x, bBoxEllipse.y, "text", ellipseId);
@@ -956,7 +975,6 @@ function ellipseMove(myData, eventTarget, e) {
         var selected = gSvg.select("#" + gCurrent + "selected");
         selected.attr("width", svgEl.getBBox().width);
 
-
         if (RESIZE_BY_RATIO) {
 
             var newRy = myData.ry * newRx / myData.rx;
@@ -967,6 +985,36 @@ function ellipseMove(myData, eventTarget, e) {
             selected.attr("height", svgEl.getBBox().height);
 
         }
+
+    } else if ("r" == gDragAnchorPos) {
+
+        var dx = e.clientX - myData.x;
+        var dy = e.clientY - myData.y;
+
+        var newRx = myData.rx + dx / 2;
+        if (newRx < ELLIPSE_RX) {
+            return;
+        }
+
+        var myMatrix = new Snap.Matrix();
+        myMatrix.translate(dx, dy);
+
+        eventTarget.transform(myMatrix);
+
+        dx /= 2;
+        var svgEl = gSvg.select("#" + gCurrent + gDragType);
+        svgEl.attr("cx", myData.cx + dx);
+        svgEl.attr("rx", newRx);
+
+        var selected = gSvg.select("#" + gCurrent + "selected");
+        selected.attr("width", svgEl.getBBox().width);
+
+        var newRy = myData.ry * newRx / myData.rx;
+
+        svgEl.attr("ry", newRy);
+
+        selected.attr("y", svgEl.getBBox().y);
+        selected.attr("height", svgEl.getBBox().height);
 
     }
 
