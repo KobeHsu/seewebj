@@ -2390,9 +2390,16 @@ function addCustom(customDef) {
     eResize.addClass("hide");
     eResize.attr("id", eResizeId);
 
+    var rResizeId = grp + "rResize";
+    var rResizeXY = getElementXYofBBox(bBoxCustom, "rResize");
+    var rResize = gSvg.circle(rResizeXY[0], rResizeXY[1], CIRCLE_R);
+    rResize.addClass("myRResize");
+    rResize.addClass("hide");
+    rResize.attr("id", rResizeId);
+
     var label = initLabelForElement(bBoxCustom, grp);
 
-    var g = gSvg.g(newCustom, close, nResize, sResize, wResize, eResize, selected, label);
+    var g = gSvg.g(newCustom, close, nResize, sResize, wResize, eResize, rResize, selected, label);
     var grpId = grp + "g";
     g.attr("id", grpId);
 
@@ -2501,6 +2508,13 @@ function correctCustomXY(grp, conn) {
     eResize.transform("translate(0 0)");
     eResize.attr("cx", eResizeXY[0]);
     eResize.attr("cy", eResizeXY[1]);
+
+    var rResize = gSvg.select("#" + grp + "rResize");
+    var rResizeXY = getElementXYofBBox(bBoxConn, "rResize");
+
+    rResize.transform("translate(0 0)");
+    rResize.attr("cx", rResizeXY[0]);
+    rResize.attr("cy", rResizeXY[1]);
 
     //var text = gSvg.select("#" + grp + "text");
     //var textXY = getElementXYofBBox(bBoxConn, "text");
@@ -2792,6 +2806,62 @@ function customMove(myData, eventTarget, e) {
                 } else {
                     newPath += lineToY + " ";
                 }
+
+            } else {
+                newPath += act;
+            }
+
+        }
+
+        svgEl.attr("d", newPath);
+
+    } else if ("r" == gDragAnchorPos) {
+
+        var dx = e.clientX - myData.x;
+        var dy = e.clientY - myData.y;
+
+        var newWidth = myData.w + dx;
+        if (newWidth < RECT_WIDTH) {
+            return;
+        }
+
+        var myMatrix = new Snap.Matrix();
+        myMatrix.translate(dx, dy);
+
+        eventTarget.transform(myMatrix);
+
+        var newX;
+        var selected = gSvg.select("#" + gCurrent + "selected");
+        selected.attr("width", newWidth);
+        newX = selected.getBBox().x;
+
+        var svgEl = gSvg.select("#" + gCurrent + gDragType);
+        var pathStr = svgEl.attr("d");
+        var pathAry = Snap.parsePathString(pathStr);
+        var pathLen = pathAry.length;
+
+        var newPath = "";
+
+        var newHeight;
+        var newY;
+
+        newHeight = newWidth * myData.h / myData.w;
+        newY = (e.clientY - gStartY) - newHeight;
+
+        selected.attr("y", newY);
+        selected.attr("height", newHeight);
+
+        for (var i = 0; i < pathLen; i++) {
+
+            var act = pathAry[i][0];
+
+            if ("Z" != act.toUpperCase()) {
+                //var lineToX = pathAry[i][1];
+                var lineToY = pathAry[i][2];
+
+                newPath += act + " ";
+                newPath += newX + (gRatioAry[i][0] * newWidth) + " ";
+                newPath += newY + (gRatioAry[i][1] * newHeight) + " ";
 
             } else {
                 newPath += act;
@@ -3928,6 +3998,11 @@ function getElementXYofBBox(bBox, elName) {
 
         xy.push(bBoxX + width);
         xy.push(bBoxY + height / 2);
+
+    } else if ("rResize" == elName) {
+
+        xy.push(bBoxX + width);
+        xy.push(bBoxY + height);
 
     } else if ("selected" == elName) {
 
