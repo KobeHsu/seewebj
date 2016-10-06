@@ -4966,7 +4966,11 @@ function borderColorChanged(e) {
 
     var childNodes = gSvg.select("#" + gCurrent + "g").selectAll("rect,ellipse,path");
     if (childNodes && childNodes.length > 0) {
-        childNodes[0].node.style.stroke = e.color.toHex();
+        // childNodes[0].node.style.stroke = e.color.toHex();
+        var clsName = childNodes[0].node.className.baseVal;
+        gSvg.selectAll("." + clsName).forEach(function (item) {
+            item.node.style.stroke = e.color.toHex();
+        });
     }
 
 }
@@ -4975,7 +4979,11 @@ function fillColorChanged(e) {
 
     var childNodes = gSvg.select("#" + gCurrent + "g").selectAll("rect,ellipse,path");
     if (childNodes && childNodes.length > 0) {
-        childNodes[0].node.style.fill = e.color.toHex();
+        // childNodes[0].node.style.fill = e.color.toHex();
+        var clsName = childNodes[0].node.className.baseVal;
+        gSvg.selectAll("." + clsName).forEach(function (item) {
+            item.node.style.fill = e.color.toHex();
+        });
     }
 
 }
