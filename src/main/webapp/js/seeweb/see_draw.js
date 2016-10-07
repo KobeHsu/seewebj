@@ -3253,14 +3253,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     $('[data-toggle="tooltip"]').tooltip({placement: "bottom"});
 
-    $('#borderColorPicker').colorpicker({
-        input: $('#borderColorHex'),
-        container: true
-    }).on('showPicker', borderColorShowPicker).on('changeColor', borderColorChanged);
-    $('#fillColorPicker').colorpicker({
-        input: $('#fillColorHex'),
-        container: true
-    }).on('showPicker', fillColorShowPicker).on('changeColor', fillColorChanged);
+    // $('#borderColorPicker').colorpicker({
+    //     input: $('#borderColorHex'),
+    //     container: true
+    // }).on('showPicker', borderColorShowPicker).on('changeColor', borderColorChanged);
+    // $('#fillColorPicker').colorpicker({
+    //     input: $('#fillColorHex'),
+    //     container: true
+    // }).on('showPicker', fillColorShowPicker).on('changeColor', fillColorChanged);
 
 		initModeling(gModelType);
 });
@@ -4962,27 +4962,32 @@ function labelMouseUp() {
     gDragAnchor = "";
 }
 
-function borderColorChanged(e) {
+function borderColorChanged(el) {
+
+    var style = window.getComputedStyle(el);
+    var color = style.getPropertyValue("background-color");//e.color.toHex();
 
     var childNodes = gSvg.select("#" + gCurrent + "g").selectAll("rect,ellipse,path");
     if (childNodes && childNodes.length > 0) {
         // childNodes[0].node.style.stroke = e.color.toHex();
         var clsName = childNodes[0].node.className.baseVal;
         gSvg.selectAll("." + clsName).forEach(function (item) {
-            item.node.style.stroke = e.color.toHex();
+            item.node.style.stroke = color;
         });
     }
 
 }
 
-function fillColorChanged(e) {
+function fillColorChanged(el) {
 
+    var style = window.getComputedStyle(el);
+    var color = style.getPropertyValue("background-color");//e.color.toHex();
     var childNodes = gSvg.select("#" + gCurrent + "g").selectAll("rect,ellipse,path");
     if (childNodes && childNodes.length > 0) {
         // childNodes[0].node.style.fill = e.color.toHex();
         var clsName = childNodes[0].node.className.baseVal;
         gSvg.selectAll("." + clsName).forEach(function (item) {
-            item.node.style.fill = e.color.toHex();
+            item.node.style.fill = color;
         });
     }
 

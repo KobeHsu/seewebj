@@ -74,8 +74,32 @@
 				<li class="context-menu__item"><a href="#" class="context-menu__link" onmousedown="svgElDuplicate()">複製元素</a></li>
 				<li class="context-menu__item"><a href="#" class="context-menu__link" onmousedown="svgElToFront()">移至上層</a></li>
 				<li class="context-menu__item"><a href="#" class="context-menu__link" onmousedown="svgElToBack()">移至下層</a></li>
-				<li class="context-menu__item"><a href="#" class="context-menu__link" id="borderColorPicker">設定框線色彩<input id="borderColorHex" type="hidden" /></a></li>				
-				<li class="context-menu__item"><a href="#" class="context-menu__link" id="fillColorPicker">設定填滿色彩<input id="fillColorHex" type="hidden" /></a></li>
+				<li class="context-menu__item"><a href="#" class="context-menu__link" id="borderColorPicker">設定框線色彩<input id="borderColorHex" type="hidden" /></a>
+					<div class="sub-context-menu">
+						<div class="color-picker-flat color-picker-red" onclick="borderColorChanged(this)">紅</div>
+						<div class="color-picker-flat color-picker-orange" onclick="borderColorChanged(this)">橙</div>
+						<div class="color-picker-flat color-picker-yellow" onclick="borderColorChanged(this)">黃</div>
+						<div class="color-picker-flat color-picker-green" onclick="borderColorChanged(this)">綠</div>
+						<div class="color-picker-flat color-picker-black" onclick="borderColorChanged(this)">藍</div>
+						<div class="color-picker-flat color-picker-indigo" onclick="borderColorChanged(this)">靛</div>
+						<div class="color-picker-flat color-picker-violet" onclick="borderColorChanged(this)">紫</div>
+						<div class="color-picker-flat color-picker-black" onclick="borderColorChanged(this)">黑</div>
+						<div class="color-picker-flat color-picker-white" onclick="borderColorChanged(this)">白</div>
+					</div>
+				</li>
+				<li class="context-menu__item"><a href="#" class="context-menu__link" id="fillColorPicker">設定填滿色彩<input id="fillColorHex" type="hidden" /></a>
+					<div class="sub-context-menu">
+						<div class="color-picker-flat color-picker-red" onclick="fillColorChanged(this)">紅</div>
+						<div class="color-picker-flat color-picker-orange" onclick="fillColorChanged(this)">橙</div>
+						<div class="color-picker-flat color-picker-yellow" onclick="fillColorChanged(this)">黃</div>
+						<div class="color-picker-flat color-picker-green" onclick="fillColorChanged(this)">綠</div>
+						<div class="color-picker-flat color-picker-black" onclick="fillColorChanged(this)">藍</div>
+						<div class="color-picker-flat color-picker-indigo" onclick="fillColorChanged(this)">靛</div>
+						<div class="color-picker-flat color-picker-violet" onclick="fillColorChanged(this)">紫</div>
+						<div class="color-picker-flat color-picker-black" onclick="fillColorChanged(this)">黑</div>
+						<div class="color-picker-flat color-picker-white" onclick="fillColorChanged(this)">白</div>
+					</div>
+				</li>
 			</ul>
 		</nav>	
 				

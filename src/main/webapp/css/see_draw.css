@@ -474,6 +474,61 @@ input[type="text"].focus {
     background-color: #0066aa;
 }
 
+.sub-context-menu {
+    display: none;
+    position: relative;
+    left:20px;
+    top: -5px;
+    #background-color: #f9f9f9;
+    min-width: 60px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 3px 3px;
+}
+
+.context-menu__item:hover .sub-context-menu {
+    display: block;
+}
+
+.color-picker-flat {
+    float:left;
+}
+
+.color-picker-red {
+    background-color: #FF0000;
+ }
+
+.color-picker-orange {
+    background-color: #FF7F00;
+ }
+
+.color-picker-yellow {
+    background-color: #FFFF00;
+}
+
+.color-picker-green {
+    background-color: #00FF00;
+}
+
+.color-picker-blue {
+    background-color: #0000FF;
+}
+
+.color-picker-indigo {
+    background-color: #4B0082;
+}
+
+.color-picker-violet {
+    background-color: #9400D3;
+}
+
+.color-picker-white {
+    background-color: #FFFFFF;
+}
+
+.color-picker-black {
+    background-color: #000000;
+}
+
 foreignobject > div {
     font: 12px sans-serif;
     color: #444;
