@@ -72,6 +72,7 @@ var gSvg;
 var gStartX;
 var gStartY;
 var gCurrent;
+var grpCurrent = [];
 var gDragAnchor;
 var gDragType;
 var gDragAnchorPos;
@@ -3299,9 +3300,12 @@ function initSelectionFontSizes() {
     }
 }
 
-function setSelected(grp, grpOld) {
+function setSelected(grp, grpOld, e) {
 
-    clearSelected(grpOld);
+    if (!e || !e.ctrlKey) {
+        clearSelected(grpOld);
+    }
+
     showElementById(grp + "selected");
     showElementById(grp + "close");
     showElementById(grp + "nResize");
@@ -4589,6 +4593,19 @@ function registerListener(id) {
 
 }
 
+function setGrpCurrent(grp, isMultiple) {
+
+    if (!isMultiple) {
+        grpCurrent.length = 0;
+    }
+    grpCurrent.push(grp)
+
+}
+
+function getGrpCurrent() {
+    return grpCurrent;
+}
+
 //endregion
 
 //region Events
@@ -4599,7 +4616,7 @@ function svgElMouseDown(event) {
     var id = this.attr("id");
     var grp = getGroupPrefix(id);
 
-    setSelected(grp, gCurrent);
+    setSelected(grp, gCurrent, event);
     gCurrent = grp;
 
     var type = getTypeById(id);

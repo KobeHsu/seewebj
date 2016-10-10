@@ -1,15 +1,15 @@
 // Initialize the Modeling
 function initModeling(modelType) {
 	if (modelType == 8) {
-		// addSwinglane(150, '外部互動界線');
-		// addSwinglane(300, '可視界線');
-		// addSwinglane(450, '內部互動界線');
-        addConnector("SwingLane", '外部互動界線', 150);
-        addConnector("SwingLane", '可視界線', 300);
-        addConnector("SwingLane", '內部互動界線', 450);
-        clearSelected("group_0001_");
-        clearSelected("group_0002_");
-        clearSelected("group_0003_");
+		addSwinglane(150, '外部互動界線');
+		addSwinglane(300, '可視界線');
+		addSwinglane(450, '內部互動界線');
+        // addConnector("SwingLane", '外部互動界線', 150);
+        // addConnector("SwingLane", '可視界線', 300);
+        // addConnector("SwingLane", '內部互動界線', 450);
+        // clearSelected("group_0001_");
+        // clearSelected("group_0002_");
+        // clearSelected("group_0003_");
 	}
 }
 // Add Swinglane
