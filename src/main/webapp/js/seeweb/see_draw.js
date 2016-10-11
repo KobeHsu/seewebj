@@ -2313,7 +2313,7 @@ function imageMove(myData, eventTarget, e) {
 
 //region Custom
 var CUSTOM_DEF = {
-    "ClippingSquare": {path: "M 30 50 L 130 50 L 130 110 L 10 107 L 10 70 Z", clsName: "myClippingSquare"},
+    "ClippingSquare": {path: "M 30 50 L 130 50 L 130 110 L 10 110 L 10 70 Z", clsName: "myClippingSquare"},
     "Diamond": {path: "M30 50 L10 70 L30 90 L50 70 Z", clsName: "myDiamond"}    
 };
 

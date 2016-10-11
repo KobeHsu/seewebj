@@ -80,7 +80,7 @@
 						<div class="color-picker-flat color-picker-orange" onclick="borderColorChanged(this)">橙</div>
 						<div class="color-picker-flat color-picker-yellow" onclick="borderColorChanged(this)">黃</div>
 						<div class="color-picker-flat color-picker-green" onclick="borderColorChanged(this)">綠</div>
-						<div class="color-picker-flat color-picker-black" onclick="borderColorChanged(this)">藍</div>
+						<div class="color-picker-flat color-picker-blue" onclick="borderColorChanged(this)">藍</div>
 						<div class="color-picker-flat color-picker-indigo" onclick="borderColorChanged(this)">靛</div>
 						<div class="color-picker-flat color-picker-violet" onclick="borderColorChanged(this)">紫</div>
 						<div class="color-picker-flat color-picker-black" onclick="borderColorChanged(this)">黑</div>
@@ -93,7 +93,7 @@
 						<div class="color-picker-flat color-picker-orange" onclick="fillColorChanged(this)">橙</div>
 						<div class="color-picker-flat color-picker-yellow" onclick="fillColorChanged(this)">黃</div>
 						<div class="color-picker-flat color-picker-green" onclick="fillColorChanged(this)">綠</div>
-						<div class="color-picker-flat color-picker-black" onclick="fillColorChanged(this)">藍</div>
+						<div class="color-picker-flat color-picker-blue" onclick="fillColorChanged(this)">藍</div>
 						<div class="color-picker-flat color-picker-indigo" onclick="fillColorChanged(this)">靛</div>
 						<div class="color-picker-flat color-picker-violet" onclick="fillColorChanged(this)">紫</div>
 						<div class="color-picker-flat color-picker-black" onclick="fillColorChanged(this)">黑</div>
