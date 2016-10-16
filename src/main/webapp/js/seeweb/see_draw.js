@@ -64,6 +64,7 @@ var CONTEXT_MENU_SHIFT_X = -5;
 var CONTEXT_MENU_SHIFT_Y = -5;
 
 var RESIZE_BY_RATIO = false;
+var UNDO_STEPS = 5;
 
 var gSerialNo = 0;
 
@@ -91,6 +92,8 @@ var gTextEditContextMenu;
 
 var gModelType = "-1";
 var gGridEnable = false;
+
+var gUndoQueue = [];
 
 var svgElMoveFunc = {
     "rect": rectMove,
@@ -209,6 +212,8 @@ function getElementXYofRect(bBoxX, bBoxY, elName, rectId) {
 }
 
 function addRect(type) {
+
+    saveUndo();
 
     var grp = getGroupPrefix(gSerialNo);
     var grpId = grp + "g";
@@ -607,6 +612,8 @@ function rectMove(myData, eventTarget, e) {
 
 //region Ellipse
 function addEllipse(type) {
+
+    saveUndo();
 
     var grp = getGroupPrefix(gSerialNo);
     var grpId = grp + "g";
@@ -2319,6 +2326,8 @@ var CUSTOM_DEF = {
 
 function addCustom(customDef) {
 
+    saveUndo();
+
     var allRect = gSvg.selectAll("rect");
 
     var grp = getGroupPrefix(gSerialNo);
@@ -2978,25 +2987,40 @@ function getGroupPrefix(id) {
 function hideElementById(elId) {
 
     var el = gSvg.select("#" + elId);
+    if (!el) {
+        el = document.getElementById(elId);
+    }
     hideElement(el);
 
 }
 
 function hideElement(el) {
     if (el) {
-        el.addClass("hide");
+        if(el.addClass) {
+            el.addClass("hide");
+        } else {
+            el.classList.add("hide");
+        }
+
     }
 }
 
 function showElementById(elId) {
 
     var el = gSvg.select("#" + elId);
+    if (!el) {
+        el = document.getElementById(elId);
+    }
     showElement(el);
 }
 
 function showElement(el) {
     if (el) {
-        el.removeClass("hide");
+        if (el.removeClass) {
+            el.removeClass("hide");
+        } else {
+            el.classList.remove("hide");
+        }
     }
 }
 
@@ -3503,8 +3527,49 @@ function svgElToBack() {
     }
 
 }
+//
+// function removeNode(id) {
+//     var node = document.getElementById(id);
+//     if (node.parentNode) {
+//         node.parentNode.removeChild(node);
+//     }
+// }
+
+function saveUndo() {
+
+    var svgHtml = gSvg.node.innerHTML;
+    if (svgHtml && svgHtml.length > 0) {
+        svgHtml = svgHtml.replace(/\r?\n|\r/g, "");
+    }
+
+    if (gUndoQueue.length > UNDO_STEPS) {
+        gUndoQueue.shift();
+    }
+
+    gUndoQueue.push(svgHtml);
+
+    if (gUndoQueue.length == 1) {
+        showElementById("svgUndoBtn");
+    }
+
+}
+
+function undo() {
+
+    var svgHtml = gUndoQueue.pop();
+    gSvg.node.innerHTML = svgHtml;
+    reloadSvg();
+
+    if (gUndoQueue.length == 0) {
+        hideElementById("svgUndoBtn");
+    }
+
+}
 
 function newDraw() {
+
+    saveUndo();
+
     gSvg.node.innerHTML = "";
     document.getElementById("loadedModel").value = "";
     document.getElementById("uuid").value = "";

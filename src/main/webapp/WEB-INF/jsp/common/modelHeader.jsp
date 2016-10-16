@@ -25,6 +25,7 @@
 			<li><a class="functionButton" class="functionButton" href="javascript: saveDraw();"><i class="fa fa-fw fa-floppy-o"></i></a></li>	
 			<li><a class="functionButton" href="javascript: deleteDraw();"><i class="fa fa-fw fa-trash-o"></i></a></li>	
 			<li><a class="functionButton" href="javascript: exportDraw();"><i class="fa fa-fw fa-file-image-o"></i></a></li>
+			<li id="svgUndoBtn" class="hide"><a class="functionButton" href="javascript: undo();"><i class="fa fa-undo"></i></a></li>
 			<li class="divider-vertical"></li>			
 			<!--
 			<li><a href="javascript: toggleGrid();"><i class="fa fa-th"></i></a></li>	
