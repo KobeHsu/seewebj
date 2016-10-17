@@ -1070,6 +1070,8 @@ function getElementXYofLine(bBoxX, bBoxY, elName, lineId) {
 
 function addLine() {
 
+    saveUndo();
+
     var grp = getGroupPrefix(gSerialNo);
     var grpId = grp + "g";
     var lineId = grp + "line";
@@ -1389,6 +1391,8 @@ function makeCurlyBrace(x1, y1, x2, y2, w, q) {
 }
 
 function addBrace(dir) {
+
+    saveUndo();
 
     var grp = getGroupPrefix(gSerialNo);
     var grpId = grp + "g";
@@ -3405,6 +3409,8 @@ function svgElRemove() {
         return;
     }
 
+    saveUndo();
+
     if ("" != gGrpTmp) {
         var grpId = gGrpTmp + "g";
         gSvg.select("#" + grpId).remove();
@@ -3852,6 +3858,7 @@ function performDelete() {
             if (jsonResult.functionStatus == "SUCCESS") {
 //				document.getElementById("loadedModel").value = "";
 //				document.getElementById("uuid").value = "";
+                saveUndo();
                 newDraw();
             } else if (jsonResult.functionStatus == "FAILED") {
                 alert(jsonResult.errorMessage);
@@ -4783,6 +4790,8 @@ function closeClick(e) {
     if (!r) {
         return;
     }
+
+    saveUndo();
 
     var grp = getGroupPrefix(this.attr("id"));
     var grpId = grp + "g";
