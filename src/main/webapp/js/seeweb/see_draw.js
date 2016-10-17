@@ -1620,6 +1620,8 @@ function braceMove(myData, eventTarget, e) {
 //region BreakDown
 function addBreak() {
 
+    saveUndo();
+
     var grp = getGroupPrefix(gSerialNo);
     var breakId = grp + "break";
 
@@ -2018,6 +2020,8 @@ function addImage() {
         document.getElementById("insertImg").value = "";
         return;
     }
+
+    saveUndo();
 
     var fReader = new FileReader();
     fReader.onload = function (event) {
@@ -2897,6 +2901,8 @@ function resizeMouseDown(event) {
 
     event.stopPropagation();
 
+    saveUndo();
+
     var id = this.attr("id");
     var grp = getGroupPrefix(id);
     gCurrent = grp;
@@ -2942,6 +2948,17 @@ function resizeMouseUp() {
         var grp = getGroupPrefix(gCurrent);
 
         var svgEl = gSvg.select("#" + gCurrent + gDragType);
+
+        var x = toInteger(svgEl.data('mousedown-x'), 0);
+        var y = toInteger(svgEl.data('mousedown-y'), 0);
+
+        var dx = toInteger(event.clientX - x, 0);
+        var dy = toInteger(event.clientY - y, 0);
+
+        if (dx==0 && dy==0) {
+            gUndoQueue.pop();
+        }
+
         correctXY(grp, svgEl, gDragType);
 
     }
@@ -3280,7 +3297,7 @@ document.addEventListener("DOMContentLoaded", function () {
     gStartX = bound.left;//gSvg.node).position().left;
     gStartY = bound.top;
 
-    $('[data-toggle="tooltip"]').tooltip({placement: "bottom"});
+    // $('[data-toggle="tooltip"]').tooltip({placement: "bottom"});
 
     // $('#borderColorPicker').colorpicker({
     //     input: $('#borderColorHex'),
@@ -3429,6 +3446,8 @@ function svgElDuplicate() {
 
     if ("" != gGrpTmp) {
 
+        saveUndo();
+
         var grpId = gGrpTmp + "g";
         var svgEl = gSvg.select("#" + grpId);
 
@@ -3511,6 +3530,8 @@ function svgElToFront() {
 
     if ("" != gGrpTmp) {
 
+        saveUndo();
+
         var grpId = gGrpTmp + "g";
         var svgEl = gSvg.select("#" + grpId);
         gSvg.append(svgEl);
@@ -3523,6 +3544,8 @@ function svgElToFront() {
 function svgElToBack() {
 
     if ("" != gGrpTmp) {
+
+        saveUndo();
 
         var grpId = gGrpTmp + "g";
         var svgEl = gSvg.select("#" + grpId);
@@ -3654,6 +3677,8 @@ function loadDraw() {
 }
 
 function performLoad(uuid) {
+
+    saveUndo();
 
     var formData = {"uuid": uuid};
     $.blockUI({message: '<h4> 模型讀取中, 請稍候</h4>'});
@@ -4256,6 +4281,9 @@ function labelRemove() {
         if (parentNode) {
             var childCount = parentNode.querySelectorAll("div,li").length;
             if (childCount > 1) {
+
+                saveUndo();
+
                 parentNode.removeChild(labelItem);
                 adjustLabelItemPosition(parentNode);
                 setSelected(gCurrent);
@@ -4283,6 +4311,8 @@ function textEdit(func, value) {
     if (!gEditingItem) {
         return;
     }
+
+    saveUndo();
 
     if ("size" == func) {
         gEditingItem.style["font-size"] = document.getElementById("textEditFontSize").value + "px";
@@ -4685,6 +4715,8 @@ function svgElMouseDown(event) {
     log("svgElMouseDown");
     event.stopPropagation();
 
+    saveUndo();
+
     var id = this.attr("id");
     var grp = getGroupPrefix(id);
 
@@ -4755,10 +4787,22 @@ function svgElMouseMove(event) {
 
 function svgElMouseUp() {
     log("svgElMouseUp");
+
     if ("" != gCurrent) {
+
 
         var grp = getGroupPrefix(gCurrent);
         var svgEl = gSvg.select("#" + gCurrent + gDragAnchor);
+
+        var x = toInteger(svgEl.data('mousedown-x'), 0);
+        var y = toInteger(svgEl.data('mousedown-y'), 0);
+
+        var dx = toInteger(event.clientX - x, 0);
+        var dy = toInteger(event.clientY - y, 0);
+
+        if (dx==0 && dy==0) {
+            gUndoQueue.pop();
+        }
 
         correctXY(grp, svgEl, gDragAnchor);
 
@@ -4880,6 +4924,8 @@ function textDblClick(e) {
 function labelItemKeyDown(e) {
     log("labelItemKeyDown");
     e.stopPropagation();
+
+    saveUndo();
 
     if (13 == e.keyCode) {
 
@@ -5055,6 +5101,8 @@ function labelMouseUp() {
 
 function borderColorChanged(el) {
 
+    saveUndo();
+
     var style = window.getComputedStyle(el);
     var color = style.getPropertyValue("background-color");//e.color.toHex();
 
@@ -5071,6 +5119,8 @@ function borderColorChanged(el) {
 
 function fillColorChanged(el) {
 
+    saveUndo();
+
     var style = window.getComputedStyle(el);
     var color = style.getPropertyValue("background-color");//e.color.toHex();
     var childNodes = gSvg.select("#" + gCurrent + "g").selectAll("rect,ellipse,path");
@@ -5084,30 +5134,30 @@ function fillColorChanged(el) {
 
 }
 
-function borderColorShowPicker(e) {
-
-    var childNodes = gSvg.select("#" + gCurrent + "g").selectAll("rect,ellipse,path");
-    if (childNodes && childNodes.length > 0) {
-        var color = childNodes[0].node.style.stroke;
-        if ("" != color) {
-            $("#borderColorPicker").colorpicker("setValue", childNodes[0].node.style.stroke);
-        }
-    }
-
-}
-
-
-function fillColorShowPicker(e) {
-
-    var childNodes = gSvg.select("#" + gCurrent + "g").selectAll("rect,ellipse,path");
-    if (childNodes && childNodes.length > 0) {
-        var color = childNodes[0].node.style.fill;
-        if ("" != color) {
-            $("#fillColorPicker").colorpicker("setValue", childNodes[0].node.style.fill);
-        }
-    }
-
-}
+// function borderColorShowPicker(e) {
+//
+//     var childNodes = gSvg.select("#" + gCurrent + "g").selectAll("rect,ellipse,path");
+//     if (childNodes && childNodes.length > 0) {
+//         var color = childNodes[0].node.style.stroke;
+//         if ("" != color) {
+//             $("#borderColorPicker").colorpicker("setValue", childNodes[0].node.style.stroke);
+//         }
+//     }
+//
+// }
+//
+//
+// function fillColorShowPicker(e) {
+//
+//     var childNodes = gSvg.select("#" + gCurrent + "g").selectAll("rect,ellipse,path");
+//     if (childNodes && childNodes.length > 0) {
+//         var color = childNodes[0].node.style.fill;
+//         if ("" != color) {
+//             $("#fillColorPicker").colorpicker("setValue", childNodes[0].node.style.fill);
+//         }
+//     }
+//
+// }
 
 //endregion
 

@@ -13,6 +13,8 @@
 
 function addConnector(type, labelText, startY) {
 
+    saveUndo();
+
     var allConn = gSvg.selectAll("path[id$='connector']");
 
     var grp = getGroupPrefix(gSerialNo);
@@ -284,6 +286,8 @@ function endPointMouseDown(event) {
 
     event.stopPropagation();
 
+    saveUndo();
+
     gGrpTmp = gCurrent;
     gCurrent = this.attr("id");
 
@@ -410,6 +414,12 @@ function endPointMouseUp() {
             var x = midPoint.data("mousedown-x");
             var y = midPoint.data("mousedown-y");
 
+            var dx = toInteger(event.clientX - x, 0);
+            var dy = toInteger(event.clientY - y, 0);
+
+            if (dx==0 && dy==0) {
+                gUndoQueue.pop();
+            }
             //if (x != event.clientX || y != event.clientY) {
             //    //endPointRemove(midPoint.attr("id"));
             //    if (gCurrent.indexOf("_mid_")>0) {
@@ -457,6 +467,8 @@ function endPointRemove() {
         alert("At lease 2 points");
         return;
     }
+
+    saveUndo();
 
     var conn = gSvg.select("#" + grp + "connector");
 
