@@ -3347,9 +3347,9 @@ function initSelectionFontSizes() {
 
 function setSelected(grp, grpOld, e) {
 
-    if (!e || !e.ctrlKey) {
+    // if (!e || !e.ctrlKey) {
         clearSelected(grpOld);
-    }
+    // }
 
     showElementById(grp + "selected");
     showElementById(grp + "close");
