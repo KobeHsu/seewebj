@@ -16,6 +16,7 @@
 /*}*/
 #drawArea {
     overflow: auto;
+    padding: 0;
 }
 .gridBackground {
     background-size: 20px 20px;
