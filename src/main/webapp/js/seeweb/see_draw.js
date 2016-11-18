@@ -2,8 +2,8 @@
 //var XML_NAME_SPACE = "http://www.w3.org/1999/xhtml";
 var __DEBUG_OUTPUT = false;
 
-var CANVAS_WIDTH = 800;
-var CANVAS_HEIGHT = 600;
+var CANVAS_WIDTH = 842;
+var CANVAS_HEIGHT = 595;
 
 var SEPARATOR = "_";
 var GROUP_PREFIX = "group";
@@ -3200,6 +3200,8 @@ document.addEventListener("DOMContentLoaded", function () {
         gSvg.attr("id", "snapSvg");
         gSvg.appendTo(gDrawArea);
     } else {
+        gSvg.attr("width",CANVAS_WIDTH);
+        gSvg.attr("height",CANVAS_HEIGHT);
         reload = true;
     }
 
@@ -4774,8 +4776,18 @@ function svgElMouseMove(event) {
     var x = toInteger(svgEl.data('mousedown-x'), 0);
     var y = toInteger(svgEl.data('mousedown-y'), 0);
 
-    var dx = event.clientX - x;
-    var dy = event.clientY - y;
+    var clientX = toInteger(event.clientX);
+    var clientY = toInteger(event.clientY);
+
+    // if (clientX < gStartX || clientX > gStartX + CANVAS_WIDTH) {
+    //     svgElMouseUp();
+    // }
+    // if (clientY < gStartY || clientY > gStartY + CANVAS_HEIGHT) {
+    //     svgElMouseUp();
+    // }
+
+    var dx = clientX - x;
+    var dy = clientY - y;
 
     var myMatrix = new Snap.Matrix();
     myMatrix.translate(dx, dy);
