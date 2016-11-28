@@ -3311,6 +3311,14 @@ document.addEventListener("DOMContentLoaded", function () {
     // }).on('showPicker', fillColorShowPicker).on('changeColor', fillColorChanged);
 
 		initModeling(gModelType);
+
+    document.onkeydown = function (e) {
+        var eventObj = window.event ? event : e
+        if (eventObj.keyCode == 90 && eventObj.ctrlKey) {
+            undo();
+        }
+    };
+
 });
 
 function initSelectionFonts() {
