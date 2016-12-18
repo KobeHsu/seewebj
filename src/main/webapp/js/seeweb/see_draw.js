@@ -349,6 +349,13 @@ function correctRectXY(grp, rect) {
         x += nowX;
         y += nowY;
 
+        if (x < 0) {
+            x = 0;
+        }
+        if (y < 0) {
+            y = 0;
+        }
+
         g.transform("translate(0 0)");
 
         rect.transform("translate(0 0)");
@@ -4771,7 +4778,7 @@ function svgElMouseDown(event) {
 }
 
 function svgElMouseMove(event) {
-
+    event.stopPropagation();
     var grp;
     if ("" != gCurrent) {
         grp = gCurrent;
@@ -4805,12 +4812,16 @@ function svgElMouseMove(event) {
 
     if (currX <= borderWidth) {
         svgElMouseUp(event, "left");
+        return;
     } else if (currX >= CANVAS_WIDTH - borderWidth) {
         svgElMouseUp(event, "right");
+        return;
     } else if (currY <= borderWidth) {
         svgElMouseUp(event, "top");
+        return;
     } else if (currY >= CANVAS_HEIGHT - borderWidth) {
         svgElMouseUp(event, "bottom");
+        return;
     }
 
     var myMatrix = new Snap.Matrix();
@@ -4823,7 +4834,7 @@ function svgElMouseMove(event) {
 
 function svgElMouseUp(event, overflow) {
     log("svgElMouseUp");
-
+    event.stopPropagation();
     if ("" != gCurrent) {
 
 
@@ -4863,11 +4874,13 @@ function svgElMouseUp(event, overflow) {
             gDrawArea.onmousemove = null;
         }
 
+        correctXY(grp, svgEl, gDragAnchor);
+
         if (dx==0 && dy==0) {
             gUndoQueue.pop();
         }
 
-        correctXY(grp, svgEl, gDragAnchor);
+
 
     }
 
