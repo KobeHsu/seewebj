@@ -21,7 +21,7 @@
 		</div>
 	</div>
 
-	<div id="drawArea" style="width: 760px;"
+	<div id="drawArea"
 		class="panel panel-primary col-md-10">
 		<svg height="600" version="1.1" width="800"
 			xmlns="http://www.w3.org/2000/svg" id="snapSvg">

@@ -2,8 +2,12 @@
 //var XML_NAME_SPACE = "http://www.w3.org/1999/xhtml";
 var __DEBUG_OUTPUT = false;
 
-var CANVAS_WIDTH = 842;
-var CANVAS_HEIGHT = 595;
+
+var INIT_CANVAS_WIDTH = 842;
+var INIT_CANVAS_HEIGHT = 595;
+
+var CANVAS_WIDTH = INIT_CANVAS_WIDTH;
+var CANVAS_HEIGHT = INIT_CANVAS_HEIGHT;
 
 var SEPARATOR = "_";
 var GROUP_PREFIX = "group";
@@ -57,7 +61,23 @@ var DIAGRAM_NAME = "";
 
 var EL_TYPES = ["rect", "connector", "ellipse", "line", "break", "brace", "image", "custom"];
 
-var SUPPORTED_FONTS = [["", ""], ["Microsoft JhengHei", "微軟正黑體"], ["Arial", "Arial"], ["Arial Black", "Arial Black"], ["Comic Sans MS", "Comic Sans MS"], ["Courier New", "Courier New"], ["Helvetica", "Helvetica"], ["Impact", "Impact"], ["serif", "serif"], ["sans-serif", "sans-serif"], ["Tahoma", "Tahoma"], ["Times New Roman", "Times New Roman"], ["Verdana", "Verdana"], ["PMingLiU", "新細明體"], ["DFKai-sb", "標楷體"]];
+var SUPPORTED_FONTS = [
+    ["", ""],
+    ["Microsoft JhengHei", "微軟正黑體"],
+    ["Arial", "Arial"],
+    ["Arial Black", "Arial Black"],
+    ["Comic Sans MS", "Comic Sans MS"],
+    ["Courier New", "Courier New"],
+    ["Helvetica", "Helvetica"],
+    ["Impact", "Impact"],
+    ["serif", "serif"],
+    ["sans-serif", "sans-serif"],
+    ["Tahoma", "Tahoma"],
+    ["Times New Roman", "Times New Roman"],
+    ["Verdana", "Verdana"],
+    ["PMingLiU", "新細明體"],
+    ["DFKai-sb", "標楷體"]
+];
 var SUPPORTED_FONT_SIZES = [12, 14, 18, 22];
 
 var CONTEXT_MENU_SHIFT_X = -5;
@@ -65,6 +85,8 @@ var CONTEXT_MENU_SHIFT_Y = -5;
 
 var RESIZE_BY_RATIO = false;
 var UNDO_STEPS = 5;
+
+var BORDER_INCREASE_SIZE = 50;
 
 var gSerialNo = 0;
 
@@ -3195,7 +3217,7 @@ function toggleGrid() {
     }
 
 }
-// document ready
+// document ready, on load
 document.addEventListener("DOMContentLoaded", function () {
 
     var reload = false;
@@ -3203,12 +3225,11 @@ document.addEventListener("DOMContentLoaded", function () {
     gDrawArea = document.getElementById("drawArea");
 
     if (!gSvg) {
-        gSvg = Snap(CANVAS_WIDTH, CANVAS_HEIGHT);
+        gSvg = Snap(INIT_CANVAS_WIDTH, INIT_CANVAS_HEIGHT);
         gSvg.attr("id", "snapSvg");
         gSvg.appendTo(gDrawArea);
     } else {
-        gSvg.attr("width",CANVAS_WIDTH);
-        gSvg.attr("height",CANVAS_HEIGHT);
+        setBorder(INIT_CANVAS_WIDTH, INIT_CANVAS_HEIGHT);
         reload = true;
     }
 
@@ -3615,6 +3636,8 @@ function undo() {
 function newDraw() {
 
     saveUndo();
+
+    setBorder(INIT_CANVAS_WIDTH, INIT_CANVAS_HEIGHT);
 
     gSvg.node.innerHTML = "";
     document.getElementById("loadedModel").value = "";
@@ -4809,19 +4832,21 @@ function svgElMouseMove(event) {
     var currY = bBox.y + dy;
 
     var borderWidth = parseInt(svgEl.attr("stroke-width"), 10) / 2;
-
+    // console.debug(currX+","+currY +":"+ CANVAS_WIDTH + ","+CANVAS_HEIGHT);
     if (currX <= borderWidth) {
         svgElMouseUp(event, "left");
         return;
-    } else if (currX >= CANVAS_WIDTH - borderWidth) {
-        svgElMouseUp(event, "right");
-        return;
+    } else if (currX + bBox.width >= CANVAS_WIDTH - borderWidth) {
+        increaseBorder("right");
+        // svgElMouseUp(event, "right");
+        // return;
     } else if (currY <= borderWidth) {
         svgElMouseUp(event, "top");
         return;
-    } else if (currY >= CANVAS_HEIGHT - borderWidth) {
-        svgElMouseUp(event, "bottom");
-        return;
+    } else if (currY + bBox.height >= CANVAS_HEIGHT - borderWidth) {
+        increaseBorder("bottom");
+        // svgElMouseUp(event, "bottom");
+        // return;
     }
 
     var myMatrix = new Snap.Matrix();
@@ -4829,6 +4854,31 @@ function svgElMouseMove(event) {
 
     var grpId = grp + "g";
     gSvg.select("#" + grpId).transform(myMatrix);
+
+}
+
+function increaseBorder(overflow) {
+
+    if (!overflow) {
+        return;
+    }
+
+    if ("right" == overflow) {
+        CANVAS_WIDTH += BORDER_INCREASE_SIZE;
+    } else if ("bottom" == overflow) {
+        CANVAS_HEIGHT += BORDER_INCREASE_SIZE;
+    }
+
+    setBorder(CANVAS_WIDTH, CANVAS_HEIGHT);
+}
+
+function setBorder(width, height) {
+
+    gSvg.attr("width", width);
+    document.getElementById("drawArea").style.width = "" + width + "px";
+
+    gSvg.attr("height", height);
+    document.getElementById("drawArea").style.height = "" + height + "px";
 
 }
 
