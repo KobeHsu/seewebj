@@ -116,6 +116,7 @@ var gModelType = "-1";
 var gGridEnable = false;
 
 var gUndoQueue = [];
+var gScrollerBarWidth=0;
 
 var svgElMoveFunc = {
     "rect": rectMove,
@@ -3347,6 +3348,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
+    gScrollerBarWidth = getScrollBarWidth();
 });
 
 function initSelectionFonts() {
@@ -4748,6 +4750,32 @@ function getGrpCurrent() {
     return grpCurrent;
 }
 
+function getScrollBarWidth() {
+    var inner = document.createElement('p');
+    inner.style.width = "100%";
+    inner.style.height = "200px";
+
+    var outer = document.createElement('div');
+    outer.style.position = "absolute";
+    outer.style.top = "0px";
+    outer.style.left = "0px";
+    outer.style.visibility = "hidden";
+    outer.style.width = "200px";
+    outer.style.height = "150px";
+    outer.style.overflow = "hidden";
+    outer.appendChild(inner);
+
+    document.body.appendChild(outer);
+    var w1 = inner.offsetWidth;
+    outer.style.overflow = 'scroll';
+    var w2 = inner.offsetWidth;
+    if (w1 == w2) w2 = outer.clientWidth;
+
+    document.body.removeChild(outer);
+
+    return (w1 - w2);
+}
+
 //endregion
 
 //region Events
@@ -4836,17 +4864,17 @@ function svgElMouseMove(event) {
     if (currX <= borderWidth) {
         svgElMouseUp(event, "left");
         return;
-    } else if (currX + bBox.width >= CANVAS_WIDTH - borderWidth) {
+    } else if (currX + bBox.width >= CANVAS_WIDTH - borderWidth + gScrollerBarWidth) {
         increaseBorder("right");
-        // svgElMouseUp(event, "right");
-        // return;
+        svgElMouseUp(event, "right");
+        return;
     } else if (currY <= borderWidth) {
         svgElMouseUp(event, "top");
         return;
-    } else if (currY + bBox.height >= CANVAS_HEIGHT - borderWidth) {
+    } else if (currY + bBox.height >= CANVAS_HEIGHT - borderWidth + gScrollerBarWidth) {
         increaseBorder("bottom");
-        // svgElMouseUp(event, "bottom");
-        // return;
+        svgElMouseUp(event, "bottom");
+        return;
     }
 
     var myMatrix = new Snap.Matrix();
@@ -4875,10 +4903,10 @@ function increaseBorder(overflow) {
 function setBorder(width, height) {
 
     gSvg.attr("width", width);
-    document.getElementById("drawArea").style.width = "" + width + "px";
+    // document.getElementById("drawArea").style.width = "" + width + "px";
 
     gSvg.attr("height", height);
-    document.getElementById("drawArea").style.height = "" + height + "px";
+    // document.getElementById("drawArea").style.height = "" + height + "px";
 
 }
 
